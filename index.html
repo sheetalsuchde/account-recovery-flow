@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Candidly — Log in</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── Tokens ── */
+    :root {
+      --color-brand:          #265ddc;
+      --color-brand-bg:       #eff4ff;
+      --color-text-primary:   #0d0d12;
+      --color-text-brand:     #265ddc;
+      --color-text-disabled:  #676d7a;
+      --color-text-white:     #ffffff;
+      --color-border-base:    #e2e4eb;
+      --color-border-strong:  #8f95a3;
+      --color-bg-neutral:     #ffffff;
+      --color-bg-readonly:    #fafbfc;
+      --color-surface:        #ffffff;
+      --radius-md:            8px;
+      --radius-lg:            12px;
+      --radius-full:          999px;
+      --font:                 'DM Sans', sans-serif;
+    }
+
+    /* ── Page ── */
+    html, body { height: 100%; }
+
+    body {
+      font-family: var(--font);
+      background-color: #f5f6fa;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* ── Decorative background shapes ── */
+    .bg-shapes {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+      background: #f8f9fc;
+    }
+
+    /* Top-right coral/pink arc */
+    .shape-tr {
+      position: absolute;
+      top: -120px;
+      right: -80px;
+      width: 380px;
+      height: 380px;
+      border-radius: 50%;
+      border: 80px solid #f0b8a8;
+      opacity: 0.45;
+    }
+
+    /* Top-right smaller purple arc */
+    .shape-tr2 {
+      position: absolute;
+      top: 60px;
+      right: -40px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      border: 55px solid #d4b8e8;
+      opacity: 0.35;
+    }
+
+    /* Bottom-left blue half-circle */
+    .shape-bl {
+      position: absolute;
+      bottom: -60px;
+      left: -120px;
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      background: #afd4f0;
+      opacity: 0.5;
+    }
+
+    /* Bottom-right peach arc */
+    .shape-br {
+      position: absolute;
+      bottom: -80px;
+      right: -60px;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      border: 60px solid #f5c5b0;
+      opacity: 0.4;
+    }
+
+    /* Bottom-center small purple blob */
+    .shape-bc {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #c4b5e8;
+      opacity: 0.45;
+    }
+
+    /* ── Page layout ── */
+    .page {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 48px 24px 64px;
+    }
+
+    /* ── Logo ── */
+    .logo-bar {
+      width: 100%;
+      max-width: 700px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 60px;
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+    }
+
+    .logo-wordmark {
+      height: 22px;
+      object-fit: contain;
+    }
+
+    /* ── Modal card ── */
+    .card {
+      background: var(--color-bg-neutral);
+      border: 1px solid var(--color-border-base);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 560px;
+      min-width: 320px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    /* ── Top content ── */
+    .top-content {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .heading-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .heading {
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 32px;
+      color: var(--color-text-primary);
+      font-optical-sizing: auto;
+    }
+
+    .subheading {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--color-text-primary);
+    }
+
+    /* ── Toggle tabs ── */
+    .toggle-group {
+      display: flex;
+      border: 1px solid var(--color-border-base);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .toggle-tab {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 56px;
+      padding: 16px 24px;
+      font-family: var(--font);
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      background: var(--color-bg-neutral);
+      color: var(--color-text-primary);
+      transition: background 0.15s, color 0.15s;
+      position: relative;
+    }
+
+    .toggle-tab + .toggle-tab {
+      border-left: 1px solid var(--color-border-base);
+    }
+
+    .toggle-tab.active {
+      background: var(--color-brand-bg);
+      color: var(--color-text-brand);
+    }
+
+    .toggle-tab .check-icon {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+    }
+
+    /* ── Google button ── */
+    .btn-google {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 24px;
+      border: 1px solid var(--color-brand);
+      border-radius: var(--radius-full);
+      background: var(--color-bg-neutral);
+      color: var(--color-text-brand);
+      font-family: var(--font);
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn-google:hover { background: var(--color-brand-bg); }
+
+    .btn-google img {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: var(--color-border-base);
+    }
+
+    .divider-label {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--color-text-disabled);
+      white-space: nowrap;
+    }
+
+    /* ── Fields stack ── */
+    .fields-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* ── Floating label text field ── */
+    .field-wrapper {
+      position: relative;
+    }
+
+    .field-wrapper input {
+      width: 100%;
+      background: var(--color-bg-neutral);
+      border: 1px solid var(--color-border-strong);
+      border-radius: var(--radius-md);
+      padding: 16px 12px 12px;
+      font-family: var(--font);
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--color-text-primary);
+      outline: none;
+      transition: border-color 0.15s;
+      min-height: 56px;
+    }
+
+    .field-wrapper input:focus {
+      border-color: var(--color-brand);
+    }
+
+    .field-wrapper .float-label {
+      position: absolute;
+      top: -9px;
+      left: 8px;
+      background: var(--color-surface);
+      padding: 0 4px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      pointer-events: none;
+    }
+
+    .float-label .label-text {
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 1.4;
+      color: var(--color-text-primary);
+      white-space: nowrap;
+    }
+
+    .float-label .label-required {
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 1.4;
+      color: var(--color-text-primary);
+      white-space: nowrap;
+    }
+
+    /* ── Primary button ── */
+    .btn-primary {
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 24px;
+      border: none;
+      border-radius: var(--radius-full);
+      background: var(--color-brand);
+      color: var(--color-text-white);
+      font-family: var(--font);
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s, opacity 0.15s;
+    }
+
+    .btn-primary:hover { opacity: 0.9; }
+    .btn-primary:active { opacity: 0.8; }
+
+    /* ── Link ── */
+    .link {
+      display: flex;
+      justify-content: center;
+    }
+
+    .link a {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--color-text-brand);
+      text-decoration: none;
+    }
+
+    .link a:hover { text-decoration: underline; }
+
+    /* ── Helper box ── */
+    .helper-box {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      background: var(--color-bg-readonly);
+      border: 1px solid var(--color-border-base);
+      border-radius: var(--radius-md);
+      padding: 8px 16px 8px 8px;
+    }
+
+    .helper-icon {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .helper-content {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .helper-title {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.5;
+      color: var(--color-text-primary);
+    }
+
+    .helper-body {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--color-text-primary);
+    }
+
+    .helper-body a {
+      color: var(--color-text-brand);
+      text-decoration: underline;
+    }
+
+    /* ── Tab panels ── */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: contents; }
+
+    /* Magic link panel specifics */
+    .field-email {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 480px) {
+      .card { padding: 24px 16px; }
+      .heading { font-size: 22px; line-height: 28px; }
+      .logo-bar { margin-bottom: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background shapes -->
+  <div class="bg-shapes" aria-hidden="true">
+    <div class="shape-tr"></div>
+    <div class="shape-tr2"></div>
+    <div class="shape-bl"></div>
+    <div class="shape-br"></div>
+    <div class="shape-bc"></div>
+  </div>
+
+  <div class="page">
+
+    <!-- Logo -->
+    <div class="logo-bar">
+      <img
+        class="logo-icon"
+        src="https://www.figma.com/api/mcp/asset/05d287e1-8bb1-4520-8244-2210f2ea1f6b"
+        alt="Candidly icon"
+      />
+      <img
+        class="logo-wordmark"
+        src="https://www.figma.com/api/mcp/asset/81ccb95f-23dd-490a-805a-9e21043d1a47"
+        alt="Candidly"
+      />
+    </div>
+
+    <!-- Card -->
+    <div class="card" role="main">
+
+      <!-- Heading + tabs -->
+      <div class="top-content">
+        <div class="heading-group">
+          <h1 class="heading">Log in to a debt-free future</h1>
+          <p class="subheading">Get a one-time magic link sent to your email, or log in with your username or email and password.</p>
+        </div>
+
+        <!-- Toggle tabs -->
+        <div class="toggle-group" role="tablist" aria-label="Login method">
+          <button
+            class="toggle-tab"
+            id="tab-magic"
+            role="tab"
+            aria-selected="false"
+            aria-controls="panel-magic"
+            onclick="switchTab('magic')"
+          >
+            Magic link
+          </button>
+          <button
+            class="toggle-tab active"
+            id="tab-login"
+            role="tab"
+            aria-selected="true"
+            aria-controls="panel-login"
+            onclick="switchTab('login')"
+          >
+            <img
+              class="check-icon"
+              src="https://www.figma.com/api/mcp/asset/550ba3f9-7e8e-4fb9-8691-dd3f7927ca87"
+              alt=""
+            />
+            Login
+          </button>
+        </div>
+      </div>
+
+      <!-- Google button (shared across tabs) -->
+      <button class="btn-google" type="button" aria-label="Log in with Google">
+        <img
+          src="https://www.figma.com/api/mcp/asset/95248e61-34cf-44aa-9c47-6d2721dd487e"
+          alt="Google logo"
+        />
+        Log in with Google
+      </button>
+
+      <!-- Divider -->
+      <div class="divider" role="separator" aria-hidden="true">
+        <div class="divider-line"></div>
+        <span class="divider-label">or</span>
+        <div class="divider-line"></div>
+      </div>
+
+      <!-- Login panel (email + password) -->
+      <div id="panel-login" role="tabpanel" aria-labelledby="tab-login" class="tab-panel active">
+        <div class="fields-stack">
+
+          <!-- Email or username -->
+          <div class="field-wrapper">
+            <input
+              type="text"
+              id="email-username"
+              name="email-username"
+              autocomplete="username"
+              aria-label="Email or username (required)"
+              aria-required="true"
+            />
+            <div class="float-label">
+              <span class="label-text">Email or username</span>
+              <span class="label-required">(required)</span>
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="field-wrapper">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              autocomplete="current-password"
+              aria-label="Password (required)"
+              aria-required="true"
+            />
+            <div class="float-label">
+              <span class="label-text">Password</span>
+              <span class="label-required">(required)</span>
+            </div>
+          </div>
+
+          <!-- Submit -->
+          <button class="btn-primary" type="submit">Log in</button>
+
+          <!-- Forgot password -->
+          <div class="link">
+            <a href="#">Forgot your password?</a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Magic link panel -->
+      <div id="panel-magic" role="tabpanel" aria-labelledby="tab-magic" class="tab-panel">
+        <div class="fields-stack">
+
+          <!-- Email -->
+          <div class="field-wrapper">
+            <input
+              type="email"
+              id="magic-email"
+              name="magic-email"
+              autocomplete="email"
+              aria-label="Email address (required)"
+              aria-required="true"
+            />
+            <div class="float-label">
+              <span class="label-text">Email address</span>
+              <span class="label-required">(required)</span>
+            </div>
+          </div>
+
+          <!-- Submit -->
+          <button class="btn-primary" type="submit">Send magic link</button>
+
+        </div>
+      </div>
+
+      <!-- Helper box -->
+      <div class="helper-box" role="note">
+        <img
+          class="helper-icon"
+          src="https://www.figma.com/api/mcp/asset/85049dea-98b5-4ae9-b2a8-0ee6cd80bce5"
+          alt="Info"
+        />
+        <div class="helper-content">
+          <p class="helper-title">Trouble logging in?</p>
+          <p class="helper-body">
+            If your employer provided access, reach out to us at
+            <a href="mailto:help@getcandidly.com">help@getcandidly.com</a>
+            and we'll help you get set up.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function switchTab(tab) {
+      const tabs = { magic: 'tab-magic', login: 'tab-login' };
+      const panels = { magic: 'panel-magic', login: 'panel-login' };
+
+      Object.keys(tabs).forEach(key => {
+        const tabEl = document.getElementById(tabs[key]);
+        const panelEl = document.getElementById(panels[key]);
+        const isActive = key === tab;
+
+        tabEl.classList.toggle('active', isActive);
+        tabEl.setAttribute('aria-selected', String(isActive));
+        panelEl.classList.toggle('active', isActive);
+
+        // Show/hide check icon only on login tab
+        const checkIcon = tabEl.querySelector('.check-icon');
+        if (checkIcon) {
+          checkIcon.style.display = isActive ? '' : 'none';
+        }
+      });
+
+      // Add check icon to the newly-active tab if it doesn't exist yet
+      const activeTabEl = document.getElementById(tabs[tab]);
+      if (!activeTabEl.querySelector('.check-icon')) {
+        const img = document.createElement('img');
+        img.className = 'check-icon';
+        img.src = 'https://www.figma.com/api/mcp/asset/550ba3f9-7e8e-4fb9-8691-dd3f7927ca87';
+        img.alt = '';
+        activeTabEl.prepend(img);
+      }
+    }
+  </script>
+
+</body>
+</html>
