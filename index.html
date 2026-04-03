@@ -442,6 +442,203 @@
       gap: 24px;
     }
 
+    /* ── Screen switching ── */
+    .screen { display: none; flex-direction: column; gap: 24px; }
+    .screen.active { display: flex; }
+
+    /* ── Back link ── */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--color-text-brand);
+      text-decoration: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      font-family: var(--font);
+    }
+    .back-link:hover { text-decoration: underline; }
+
+    /* ── Recovery: icon ── */
+    .recovery-icon-wrap {
+      width: 48px;
+      height: 48px;
+      background: #fff7ed;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* ── Recovery: heading group ── */
+    .recovery-heading {
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--color-text-primary);
+    }
+
+    .recovery-subheading {
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #4b5563;
+      margin-top: 4px;
+    }
+
+    /* ── Recovery: info box ── */
+    .recovery-info-box {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .terminated-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      background: #fef3c7;
+      border: 1px solid #fcd34d;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #92400e;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      width: fit-content;
+    }
+
+    .recovery-info-text {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #78350f;
+    }
+
+    .recovery-info-text strong {
+      font-weight: 600;
+    }
+
+    /* ── Recovery: primary CTA ── */
+    .btn-primary-arrow {
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 24px;
+      border: none;
+      border-radius: var(--radius-full);
+      background: var(--color-brand);
+      color: var(--color-text-white);
+      font-family: var(--font);
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: opacity 0.15s;
+    }
+    .btn-primary-arrow:hover { opacity: 0.9; }
+
+    /* ── Recovery: other options ── */
+    .other-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .other-options-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-text-disabled);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+    }
+
+    .option-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 0;
+      border-top: 1px solid var(--color-border-base);
+    }
+
+    .option-row:last-child {
+      border-bottom: 1px solid var(--color-border-base);
+    }
+
+    .option-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--color-bg-readonly);
+      border: 1px solid var(--color-border-base);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .option-text {
+      flex: 1;
+    }
+
+    .option-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+    }
+
+    .option-desc {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--color-text-disabled);
+      margin-top: 1px;
+    }
+
+    .option-chevron {
+      color: var(--color-border-strong);
+      flex-shrink: 0;
+    }
+
+    .option-row-btn {
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 0;
+      font-family: var(--font);
+      text-align: left;
+      border-top: 1px solid var(--color-border-base);
+    }
+
+    .option-row-btn:last-child {
+      border-bottom: 1px solid var(--color-border-base);
+    }
+
+    .option-row-btn:hover .option-title { color: var(--color-text-brand); }
+
+    /* ── Add email screen ── */
+    .add-email-intro {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #4b5563;
+    }
+
     /* ── Responsive ── */
     @media (max-width: 480px) {
       .card { padding: 24px 16px; }
@@ -482,153 +679,309 @@
     <!-- Card -->
     <div class="card" role="main">
 
-      <!-- Heading + tabs -->
-      <div class="top-content">
-        <div class="heading-group">
-          <h1 class="heading">Log in to a debt-free future</h1>
-          <p class="subheading">Get a one-time magic link sent to your email, or log in with your username or email and password.</p>
+      <!-- ═══════════════════════════════════════════
+           SCREEN 1: Login
+      ════════════════════════════════════════════ -->
+      <div id="screen-login" class="screen active">
+
+        <!-- Heading + tabs -->
+        <div class="top-content">
+          <div class="heading-group">
+            <h1 class="heading">Log in to a debt-free future</h1>
+            <p class="subheading">Get a one-time magic link sent to your email, or log in with your username or email and password.</p>
+          </div>
+
+          <!-- Toggle tabs -->
+          <div class="toggle-group" role="tablist" aria-label="Login method">
+            <button
+              class="toggle-tab"
+              id="tab-magic"
+              role="tab"
+              aria-selected="false"
+              aria-controls="panel-magic"
+              onclick="switchTab('magic')"
+            >
+              Magic link
+            </button>
+            <button
+              class="toggle-tab active"
+              id="tab-login"
+              role="tab"
+              aria-selected="true"
+              aria-controls="panel-login"
+              onclick="switchTab('login')"
+            >
+              <img
+                class="check-icon"
+                src="https://www.figma.com/api/mcp/asset/550ba3f9-7e8e-4fb9-8691-dd3f7927ca87"
+                alt=""
+              />
+              Login
+            </button>
+          </div>
         </div>
 
-        <!-- Toggle tabs -->
-        <div class="toggle-group" role="tablist" aria-label="Login method">
-          <button
-            class="toggle-tab"
-            id="tab-magic"
-            role="tab"
-            aria-selected="false"
-            aria-controls="panel-magic"
-            onclick="switchTab('magic')"
-          >
-            Magic link
-          </button>
-          <button
-            class="toggle-tab active"
-            id="tab-login"
-            role="tab"
-            aria-selected="true"
-            aria-controls="panel-login"
-            onclick="switchTab('login')"
-          >
-            <img
-              class="check-icon"
-              src="https://www.figma.com/api/mcp/asset/550ba3f9-7e8e-4fb9-8691-dd3f7927ca87"
-              alt=""
-            />
-            Login
-          </button>
+        <!-- Google button -->
+        <button class="btn-google" type="button" aria-label="Log in with Google">
+          <img
+            src="https://www.figma.com/api/mcp/asset/95248e61-34cf-44aa-9c47-6d2721dd487e"
+            alt="Google logo"
+          />
+          Log in with Google
+        </button>
+
+        <!-- Divider -->
+        <div class="divider" role="separator" aria-hidden="true">
+          <div class="divider-line"></div>
+          <span class="divider-label">or</span>
+          <div class="divider-line"></div>
         </div>
-      </div>
 
-      <!-- Google button (shared across tabs) -->
-      <button class="btn-google" type="button" aria-label="Log in with Google">
-        <img
-          src="https://www.figma.com/api/mcp/asset/95248e61-34cf-44aa-9c47-6d2721dd487e"
-          alt="Google logo"
-        />
-        Log in with Google
-      </button>
+        <!-- Login panel -->
+        <div id="panel-login" role="tabpanel" aria-labelledby="tab-login" class="tab-panel active">
+          <div class="fields-stack">
 
-      <!-- Divider -->
-      <div class="divider" role="separator" aria-hidden="true">
-        <div class="divider-line"></div>
-        <span class="divider-label">or</span>
-        <div class="divider-line"></div>
-      </div>
-
-      <!-- Login panel (email + password) -->
-      <div id="panel-login" role="tabpanel" aria-labelledby="tab-login" class="tab-panel active">
-        <div class="fields-stack">
-
-          <!-- Email or username -->
-          <div class="field-wrapper">
-            <input
-              type="text"
-              id="email-username"
-              name="email-username"
-              autocomplete="username"
-              aria-label="Email or username (required)"
-              aria-required="true"
-            />
-            <div class="float-label">
-              <span class="label-text">Email or username</span>
-              <span class="label-required">(required)</span>
+            <div class="field-wrapper">
+              <input
+                type="text"
+                id="email-username"
+                name="email-username"
+                autocomplete="username"
+                aria-label="Email or username (required)"
+                aria-required="true"
+              />
+              <div class="float-label">
+                <span class="label-text">Email or username</span>
+                <span class="label-required">(required)</span>
+              </div>
             </div>
-          </div>
 
-          <!-- Password -->
-          <div class="field-wrapper">
-            <input
-              type="password"
-              id="password"
-              name="password"
-              autocomplete="current-password"
-              aria-label="Password (required)"
-              aria-required="true"
-            />
-            <div class="float-label">
-              <span class="label-text">Password</span>
-              <span class="label-required">(required)</span>
+            <div class="field-wrapper">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                autocomplete="current-password"
+                aria-label="Password (required)"
+                aria-required="true"
+              />
+              <div class="float-label">
+                <span class="label-text">Password</span>
+                <span class="label-required">(required)</span>
+              </div>
             </div>
+
+            <button class="btn-primary" type="button" onclick="handleLogin()">Log in</button>
+
+            <div class="link">
+              <a href="#">Forgot your password?</a>
+            </div>
+
           </div>
-
-          <!-- Submit -->
-          <button class="btn-primary" type="submit">Log in</button>
-
-          <!-- Forgot password -->
-          <div class="link">
-            <a href="#">Forgot your password?</a>
-          </div>
-
         </div>
-      </div>
 
-      <!-- Magic link panel -->
-      <div id="panel-magic" role="tabpanel" aria-labelledby="tab-magic" class="tab-panel">
+        <!-- Magic link panel -->
+        <div id="panel-magic" role="tabpanel" aria-labelledby="tab-magic" class="tab-panel">
+          <div class="fields-stack">
+
+            <div class="field-wrapper">
+              <input
+                type="email"
+                id="magic-email"
+                name="magic-email"
+                autocomplete="email"
+                aria-label="Email address (required)"
+                aria-required="true"
+              />
+              <div class="float-label">
+                <span class="label-text">Email address</span>
+                <span class="label-required">(required)</span>
+              </div>
+            </div>
+
+            <button class="btn-primary" type="submit">Send magic link</button>
+
+          </div>
+        </div>
+
+        <!-- Helper box -->
+        <div class="helper-box" role="note">
+          <img
+            class="helper-icon"
+            src="https://www.figma.com/api/mcp/asset/85049dea-98b5-4ae9-b2a8-0ee6cd80bce5"
+            alt="Info"
+          />
+          <div class="helper-content">
+            <p class="helper-title">Trouble logging in?</p>
+            <p class="helper-body">
+              If your employer provided access, reach out to us at
+              <a href="mailto:help@getcandidly.com">help@getcandidly.com</a>
+              and we'll help you get set up.
+            </p>
+          </div>
+        </div>
+
+      </div><!-- /screen-login -->
+
+
+      <!-- ═══════════════════════════════════════════
+           SCREEN 2: Terminated account — can't reach you
+      ════════════════════════════════════════════ -->
+      <div id="screen-recovery" class="screen">
+
+        <!-- Back -->
+        <button class="back-link" onclick="showScreen('login')" aria-label="Back to login">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M10 12L6 8l4-4" stroke="#265ddc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Back to log in
+        </button>
+
+        <!-- Icon + heading -->
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="recovery-icon-wrap" aria-hidden="true">
+            <!-- Mail-off icon -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 7L9.5 12M21 7L14.5 12M3 7C3 5.895 3.895 5 5 5H19C20.105 5 21 5.895 21 7V17C21 18.105 20.105 19 19 19H5C3.895 19 3 18.105 3 17V7Z" stroke="#f97316" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <line x1="3" y1="3" x2="21" y2="21" stroke="#f97316" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div>
+            <h2 class="recovery-heading">We can't reach you</h2>
+            <p class="recovery-subheading">Your work email is inactive. To unlock your data, you'll need to add a personal email ID.</p>
+          </div>
+        </div>
+
+        <!-- Terminated account info box -->
+        <div class="recovery-info-box" role="alert">
+          <span class="terminated-badge">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <circle cx="5" cy="5" r="4" stroke="#92400e" stroke-width="1.2"/>
+              <path d="M5 3v2.5M5 7h.01" stroke="#92400e" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+            Terminated Account
+          </span>
+          <p class="recovery-info-text">
+            No verified contact method on file for
+            <strong id="terminated-email">alex.chen@acme.com</strong>.
+          </p>
+        </div>
+
+        <!-- Primary CTA -->
+        <button class="btn-primary-arrow" onclick="showScreen('add-email')">
+          Add a personal email
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <!-- Other options -->
+        <div class="other-options">
+          <p class="other-options-label">Other options</p>
+
+          <button class="option-row-btn" onclick="alert('HR verification request sent.')">
+            <div class="option-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <path d="M9 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6ZM3 14c0-2.21 2.686-4 6-4s6 1.79 6 4" stroke="#676d7a" stroke-width="1.4" stroke-linecap="round"/>
+                <path d="M13 10l1.5 1.5L16 10" stroke="#676d7a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="option-text">
+              <p class="option-title">Request HR verification</p>
+              <p class="option-desc">Ask your HR team to confirm your identity</p>
+            </div>
+            <svg class="option-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M6 4l4 4-4 4" stroke="#8f95a3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
+          <button class="option-row-btn" onclick="window.location='mailto:help@getcandidly.com'">
+            <div class="option-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <circle cx="9" cy="9" r="6.5" stroke="#676d7a" stroke-width="1.4"/>
+                <path d="M9 8v4M9 6h.01" stroke="#676d7a" stroke-width="1.4" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="option-text">
+              <p class="option-title">Contact support</p>
+              <p class="option-desc">Reach out to help@getcandidly.com</p>
+            </div>
+            <svg class="option-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M6 4l4 4-4 4" stroke="#8f95a3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+
+      </div><!-- /screen-recovery -->
+
+
+      <!-- ═══════════════════════════════════════════
+           SCREEN 3: Add personal email
+      ════════════════════════════════════════════ -->
+      <div id="screen-add-email" class="screen">
+
+        <!-- Back -->
+        <button class="back-link" onclick="showScreen('recovery')" aria-label="Back">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M10 12L6 8l4-4" stroke="#265ddc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Back
+        </button>
+
+        <!-- Heading -->
+        <div>
+          <h2 class="recovery-heading">Add a personal email</h2>
+          <p class="recovery-subheading">We'll send a verification link to confirm it's you. This email will be used to recover your account.</p>
+        </div>
+
+        <!-- Email field -->
         <div class="fields-stack">
-
-          <!-- Email -->
           <div class="field-wrapper">
             <input
               type="email"
-              id="magic-email"
-              name="magic-email"
+              id="personal-email"
+              name="personal-email"
               autocomplete="email"
-              aria-label="Email address (required)"
+              aria-label="Personal email address (required)"
               aria-required="true"
+              placeholder=" "
             />
             <div class="float-label">
-              <span class="label-text">Email address</span>
+              <span class="label-text">Personal email address</span>
               <span class="label-required">(required)</span>
             </div>
           </div>
 
-          <!-- Submit -->
-          <button class="btn-primary" type="submit">Send magic link</button>
-
+          <button class="btn-primary-arrow" onclick="handleAddEmail()">
+            Send verification link
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
         </div>
-      </div>
 
-      <!-- Helper box -->
-      <div class="helper-box" role="note">
-        <img
-          class="helper-icon"
-          src="https://www.figma.com/api/mcp/asset/85049dea-98b5-4ae9-b2a8-0ee6cd80bce5"
-          alt="Info"
-        />
-        <div class="helper-content">
-          <p class="helper-title">Trouble logging in?</p>
-          <p class="helper-body">
-            If your employer provided access, reach out to us at
-            <a href="mailto:help@getcandidly.com">help@getcandidly.com</a>
-            and we'll help you get set up.
-          </p>
+        <!-- Info -->
+        <div class="helper-box" role="note">
+          <img
+            class="helper-icon"
+            src="https://www.figma.com/api/mcp/asset/85049dea-98b5-4ae9-b2a8-0ee6cd80bce5"
+            alt="Info"
+          />
+          <div class="helper-content">
+            <p class="helper-title">Why do we need this?</p>
+            <p class="helper-body">
+              Since your work email is no longer active, a personal email lets you access your Candidly data securely even after leaving your employer.
+            </p>
+          </div>
         </div>
-      </div>
+
+      </div><!-- /screen-add-email -->
 
     </div>
   </div>
 
   <script>
+    // ── Tab switching (login screen) ──
     function switchTab(tab) {
       const tabs = { magic: 'tab-magic', login: 'tab-login' };
       const panels = { magic: 'panel-magic', login: 'panel-login' };
@@ -642,14 +995,10 @@
         tabEl.setAttribute('aria-selected', String(isActive));
         panelEl.classList.toggle('active', isActive);
 
-        // Show/hide check icon only on login tab
         const checkIcon = tabEl.querySelector('.check-icon');
-        if (checkIcon) {
-          checkIcon.style.display = isActive ? '' : 'none';
-        }
+        if (checkIcon) checkIcon.style.display = isActive ? '' : 'none';
       });
 
-      // Add check icon to the newly-active tab if it doesn't exist yet
       const activeTabEl = document.getElementById(tabs[tab]);
       if (!activeTabEl.querySelector('.check-icon')) {
         const img = document.createElement('img');
@@ -658,6 +1007,56 @@
         img.alt = '';
         activeTabEl.prepend(img);
       }
+    }
+
+    // ── Screen navigation ──
+    const SCREENS = ['login', 'recovery', 'add-email'];
+
+    function showScreen(name) {
+      SCREENS.forEach(s => {
+        const el = document.getElementById('screen-' + s);
+        if (el) el.classList.toggle('active', s === name);
+      });
+      // Scroll card into view smoothly
+      document.querySelector('.card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // ── Login submit: detect terminated org email ──
+    const PERSONAL_DOMAINS = new Set([
+      'gmail.com','yahoo.com','hotmail.com','outlook.com',
+      'icloud.com','me.com','live.com','aol.com','protonmail.com','hey.com'
+    ]);
+
+    function isOrgEmail(value) {
+      const parts = value.trim().toLowerCase().split('@');
+      if (parts.length !== 2) return false;
+      return !PERSONAL_DOMAINS.has(parts[1]);
+    }
+
+    function handleLogin() {
+      const emailInput = document.getElementById('email-username');
+      const email = emailInput.value.trim();
+
+      if (!email) {
+        emailInput.focus();
+        return;
+      }
+
+      if (isOrgEmail(email)) {
+        // Show terminated-account recovery screen with their email
+        document.getElementById('terminated-email').textContent = email;
+        showScreen('recovery');
+      }
+      // Personal emails would proceed to normal login (not implemented in prototype)
+    }
+
+    // ── Add personal email submit ──
+    function handleAddEmail() {
+      const input = document.getElementById('personal-email');
+      const email = input.value.trim();
+      if (!email || !email.includes('@')) { input.focus(); return; }
+      // In production this would POST to the API
+      alert('Verification link sent to ' + email + '.\nCheck your inbox to complete recovery.');
     }
   </script>
 
