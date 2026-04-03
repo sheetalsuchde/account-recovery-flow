@@ -151,6 +151,25 @@
 
     /* ── Text link ── */
     .tlink { color: var(--brand); font-size: 14px; font-weight: 500; text-decoration: none; cursor: pointer; background: none; border: none; padding: 0; }
+
+    /* ── Recovery option cards (Figma design) ── */
+    .recovery-card {
+      background: var(--surface);
+      border: 1px solid #f0f2f5;
+      border-radius: var(--r-lg);
+      padding: 24px;
+      width: 100%;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: border-color .15s, background .15s;
+    }
+    .recovery-card:hover { border-color: var(--brand); }
+    .recovery-card.selected { border-color: var(--brand); background: var(--brand-bg); }
+    .recovery-card-title { font-size: 20px; font-weight: 700; line-height: 24px; color: var(--text); margin: 0; }
+    .recovery-card-desc  { font-size: 14px; font-weight: 400; line-height: 1.5; color: #2a2f3d; margin: 0; }
     .tlink:hover { text-decoration: underline; }
 
     /* ── Toggle tabs ── */
@@ -455,53 +474,29 @@
       ════════════════════════════════ -->
       <div id="screen-terminated" class="screen">
 
-        <button class="back" onclick="showScreen('login')">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="#265ddc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Back to log in
+        <button class="back" onclick="showScreen('login')">Back to login</button>
+
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div style="display:flex;flex-direction:column;gap:4px;">
+            <h2 class="h1">Your account access needs to be restored</h2>
+            <p class="sub">Your organization account is no longer active, so your work credentials can't be used. You can still access Candidly—we just need to verify your identity to restore your account.</p>
+          </div>
+          <p style="font-size:16px;font-weight:700;line-height:1.5;color:var(--text);margin:0;">Do you still have access to your work inbox at <span id="inbox-email-display" style="color:var(--text)">your work email</span>?</p>
+        </div>
+
+        <!-- Yes card -->
+        <button class="recovery-card" id="card-yes" onclick="selectRecoveryOption('yes')">
+          <p class="recovery-card-title">Yes — send a recovery link</p>
+          <p class="recovery-card-desc">We'll email a secure link to your work inbox so you can quickly restore access.</p>
         </button>
 
-        <div style="display:flex;flex-direction:column;gap:12px;">
-          <div class="icon-bubble amber">
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-              <path d="M11 2C6.03 2 2 6.03 2 11s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 13.5c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm1-4.5h-2V6h2v5z" fill="#d97706"/>
-            </svg>
-          </div>
-          <div>
-            <h2 class="h2">Your org account has been terminated. Your work credentials are no longer valid.</h2>
-            <p class="sub">You can still access Candidly. We just need to verify your identity to restore access.</p>
-          </div>
-        </div>
+        <!-- No card -->
+        <button class="recovery-card" id="card-no" onclick="selectRecoveryOption('no')">
+          <p class="recovery-card-title">No — I can't access that inbox</p>
+          <p class="recovery-card-desc">Use a personal email instead to verify your identity and continue.</p>
+        </button>
 
-        <div style="display:flex;flex-direction:column;gap:6px;padding-top:4px;">
-          <p style="font-size:15px;font-weight:600;color:var(--text);">Can you still access your work inbox?</p>
-          <p class="sub" style="margin-top:0;">at <strong id="inbox-email-display" style="color:var(--text)">your work email</strong></p>
-        </div>
-
-        <div class="options-stack">
-          <!-- Yes -->
-          <button class="option-card primary" onclick="handleSendWorkRecovery()">
-            <div class="option-card-icon">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.25 4.5h13.5M2.25 4.5c0-.828.672-1.5 1.5-1.5h10.5c.828 0 1.5.672 1.5 1.5M2.25 4.5v9c0 .828.672 1.5 1.5 1.5h10.5c.828 0 1.5-.672 1.5-1.5v-9M6 9l2.25 2.25L12 7.5" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-            <div class="option-card-body">
-              <p class="option-card-title">Yes — send a recovery link there</p>
-              <p class="option-card-desc">We'll email a secure link to your work inbox</p>
-            </div>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-
-          <!-- No -->
-          <button class="option-card secondary" onclick="showScreen('add-email')">
-            <div class="option-card-icon">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 4.5l9 9M13.5 4.5l-9 9" stroke="#676d7a" stroke-width="1.3" stroke-linecap="round"/></svg>
-            </div>
-            <div class="option-card-body">
-              <p class="option-card-title">No — I can't access that inbox</p>
-              <p class="option-card-desc">Use a personal email to verify instead</p>
-            </div>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="#8f95a3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-        </div>
+        <button class="btn btn-primary" onclick="handleTerminatedContinue()">Continue</button>
 
       </div><!-- /screen-terminated -->
 
@@ -832,12 +827,32 @@
       if (isOrgEmail(email)) {
         state.orgEmail = email;
         document.getElementById('inbox-email-display').textContent = email;
+        // Reset card selection
+        terminatedChoice = null;
+        ['card-yes','card-no'].forEach(id => document.getElementById(id)?.classList.remove('selected'));
         showScreen('terminated');
       }
     }
 
     function handleSendWorkRecovery() {
       alert('Recovery link sent to ' + state.orgEmail + '. Check your work inbox.');
+    }
+
+    let terminatedChoice = null;
+
+    function selectRecoveryOption(choice) {
+      terminatedChoice = choice;
+      document.getElementById('card-yes').classList.toggle('selected', choice === 'yes');
+      document.getElementById('card-no').classList.toggle('selected', choice === 'no');
+    }
+
+    function handleTerminatedContinue() {
+      if (!terminatedChoice) return;
+      if (terminatedChoice === 'yes') {
+        handleSendWorkRecovery();
+      } else {
+        showScreen('add-email');
+      }
     }
 
     /* ═══════════════ SEND OTP ═══════════════ */
