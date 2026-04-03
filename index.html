@@ -864,7 +864,6 @@
 
       if (code === CORRECT_OTP) {
         document.getElementById('verified-email').textContent = state.personalEmail;
-        document.getElementById('success-email').textContent  = state.personalEmail;
         showScreen('verified');
       } else {
         state.otpAttempts++;
@@ -910,7 +909,6 @@
 
       if (code === CORRECT_OTP) {
         document.getElementById('verified-email').textContent = state.personalEmail;
-        document.getElementById('success-email').textContent  = state.personalEmail;
         showScreen('verified');
       } else {
         state.otpAttempts++;
