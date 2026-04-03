@@ -344,84 +344,6 @@
        SCREEN 8 — DASHBOARD
     ══════════════════════════════════════════ */
 
-    /* The dashboard replaces the whole page */
-    #dashboard-page {
-      display:none;
-      position:fixed; inset:0; z-index:100;
-      background:#f3f5fb;
-      overflow-y:auto;
-    }
-    #dashboard-page.active { display:block; }
-
-    .dash-header {
-      background:#fff; border-bottom:1px solid var(--border);
-      padding:0 32px; height:60px;
-      display:flex; align-items:center; justify-content:space-between;
-      position:sticky; top:0; z-index:10;
-    }
-    .dash-logo { display:flex; align-items:center; gap:4px; }
-    .dash-user { display:flex; align-items:center; gap:10px; }
-    .dash-avatar {
-      width:32px; height:32px; border-radius:50%;
-      background:var(--brand); color:#fff;
-      font-size:13px; font-weight:700;
-      display:flex; align-items:center; justify-content:center;
-    }
-    .dash-username { font-size:14px; font-weight:500; color:var(--text); }
-
-    .dash-body { max-width:760px; margin:0 auto; padding:32px 24px 80px; }
-
-    .dash-banner {
-      background:var(--amber-bg); border:1px solid var(--amber-border);
-      border-radius:var(--r-md); padding:12px 16px;
-      display:flex; align-items:center; gap:10px;
-      margin-bottom:28px;
-    }
-    .dash-banner-text { font-size:14px; font-weight:500; color:var(--amber-dark); }
-    .dash-banner-text strong { font-weight:700; }
-
-    .dash-greeting { font-size:22px; font-weight:700; color:var(--text); margin-bottom:20px; }
-
-    .dash-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; margin-bottom:28px; }
-
-    .dash-card {
-      background:#fff; border:1px solid var(--border); border-radius:var(--r-lg); padding:20px;
-      display:flex; flex-direction:column; gap:12px;
-    }
-    .dash-card-label { font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.06em; color:var(--text-3); }
-    .dash-card-value { font-size:22px; font-weight:700; color:var(--text); }
-    .dash-card-sub   { font-size:13px; color:var(--text-3); }
-    .dash-card-action {
-      display:inline-flex; align-items:center; gap:5px;
-      font-size:13px; font-weight:600; color:var(--brand);
-      text-decoration:none; background:none; border:none; cursor:pointer; padding:0;
-    }
-    .dash-card-action:hover { text-decoration:underline; }
-
-    .dash-exit-ramp {
-      background: linear-gradient(135deg, #1e3a8a 0%, #265ddc 100%);
-      border-radius:var(--r-lg); padding:28px 24px;
-      display:flex; align-items:center; justify-content:space-between; gap:20px;
-    }
-    .dash-exit-text { flex:1; }
-    .dash-exit-label { font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:rgba(255,255,255,.65); margin-bottom:6px; }
-    .dash-exit-heading { font-size:18px; font-weight:700; color:#fff; line-height:1.3; margin-bottom:6px; }
-    .dash-exit-sub { font-size:14px; color:rgba(255,255,255,.75); line-height:1.5; }
-    .dash-exit-btn {
-      background:#fff; color:var(--brand);
-      border:none; border-radius:var(--r-full);
-      padding:12px 22px; font-size:14px; font-weight:700;
-      cursor:pointer; white-space:nowrap; flex-shrink:0;
-      transition:opacity .15s;
-    }
-    .dash-exit-btn:hover { opacity:.9; }
-
-    .dash-logout {
-      display:block; text-align:center; margin-top:32px;
-      font-size:14px; color:var(--text-3); text-decoration:none; cursor:pointer;
-      background:none; border:none;
-    }
-    .dash-logout:hover { color:var(--red); text-decoration:underline; }
 
     /* ── Responsive ── */
     @media (max-width:520px) {
@@ -431,8 +353,6 @@
       .logo-bar { margin-bottom:32px; }
       .otp-box { width:44px; height:54px; font-size:20px; }
       .data-status-grid { grid-template-columns:1fr; }
-      .dash-exit-ramp { flex-direction:column; }
-      .dash-header { padding:0 16px; }
       .dash-body { padding:20px 16px 60px; }
     }
   </style>
@@ -446,89 +366,6 @@
     <div class="shape s3"></div>
     <div class="shape s4"></div>
     <div class="shape s5"></div>
-  </div>
-
-  <!-- ══════════════════════════════════════════════════════
-       SCREEN 8 — READ-ONLY DASHBOARD (full-page overlay)
-  ══════════════════════════════════════════════════════ -->
-  <div id="dashboard-page" role="main" aria-label="Your Candidly dashboard">
-    <header class="dash-header">
-      <div class="dash-logo">
-        <div class="logo-symbol">
-          <img class="logo-icon" src="https://www.figma.com/api/mcp/asset/40fdc83f-08b7-48d9-bf94-b941b5fc8eb9" alt="Candidly icon" />
-        </div>
-        <img class="logo-wordmark" src="https://www.figma.com/api/mcp/asset/3aff0913-894e-4d1a-9082-b7a99b210fce" alt="candidly" />
-      </div>
-      <div class="dash-user">
-        <div class="dash-avatar" aria-hidden="true">AC</div>
-        <span class="dash-username">Alex Chen</span>
-      </div>
-    </header>
-
-    <div class="dash-body">
-      <!-- Read-only banner -->
-      <div class="dash-banner" role="alert">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-          <circle cx="9" cy="9" r="7.5" stroke="#d97706" stroke-width="1.4"/>
-          <path d="M9 5.5v4M9 11.5h.01" stroke="#d97706" stroke-width="1.4" stroke-linecap="round"/>
-        </svg>
-        <p class="dash-banner-text"><strong>Employer paused · </strong>Your data is read-only. Employer contributions are suspended until re-enrollment.</p>
-      </div>
-
-      <h1 class="dash-greeting">Welcome back, Alex 👋</h1>
-
-      <!-- Data cards -->
-      <div class="dash-grid">
-        <div class="dash-card">
-          <p class="dash-card-label">Student Loans</p>
-          <p class="dash-card-value">$24,340</p>
-          <p class="dash-card-sub">3 loans tracked</p>
-          <button class="dash-card-action" onclick="alert('Loan tracker — read-only view')">
-            View loans
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M8 3.5L11.5 7 8 10.5" stroke="#265ddc" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-        </div>
-        <div class="dash-card">
-          <p class="dash-card-label">Financial Snapshot</p>
-          <p class="dash-card-value">Mar 2025</p>
-          <p class="dash-card-sub">Last updated 18 days ago</p>
-          <button class="dash-card-action" onclick="alert('Snapshots — read-only view')">
-            View snapshots
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M8 3.5L11.5 7 8 10.5" stroke="#265ddc" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-        </div>
-        <div class="dash-card">
-          <p class="dash-card-label">Documents</p>
-          <p class="dash-card-value">12</p>
-          <p class="dash-card-sub">Statements &amp; letters saved</p>
-          <button class="dash-card-action" onclick="alert('Documents — read-only view')">
-            View documents
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M8 3.5L11.5 7 8 10.5" stroke="#265ddc" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-        </div>
-        <div class="dash-card">
-          <p class="dash-card-label">Employer Contributions</p>
-          <p class="dash-card-value" style="font-size:16px;color:var(--amber);margin-top:4px;">Paused</p>
-          <p class="dash-card-sub">Active when re-enrolled with an employer</p>
-        </div>
-      </div>
-
-      <!-- Exit ramp -->
-      <div class="dash-exit-ramp">
-        <div class="dash-exit-text">
-          <p class="dash-exit-label">Still paying off loans?</p>
-          <h2 class="dash-exit-heading">Find a new employer benefit</h2>
-          <p class="dash-exit-sub">Candidly works with 500+ companies. Re-enroll with your next employer to resume contributions.</p>
-        </div>
-        <button class="dash-exit-btn" onclick="alert('Employer search — coming soon')">
-          Find employers →
-        </button>
-      </div>
-
-      <button class="dash-logout" onclick="showScreen('login'); document.getElementById('dashboard-page').classList.remove('active');">
-        Sign out
-      </button>
-    </div>
   </div>
 
   <!-- ══════════════════════════════════════════════════════
@@ -934,7 +771,7 @@
             <div class="flabel"><span>Confirm password</span><span style="color:var(--text-3)">(required)</span></div>
           </div>
 
-          <button class="btn btn-primary" onclick="handleSetPassword()">Create account</button>
+          <button class="btn btn-primary" onclick="handleSetPassword()">Restore my access</button>
         </div>
 
       </div><!-- /screen-set-password -->
@@ -955,7 +792,7 @@
             <h2 class="h2">You're back in</h2>
             <p class="sub">Your Candidly account is now secured with <strong id="success-email" style="color:var(--text)">your personal email</strong>. Your data is ready.</p>
           </div>
-          <button class="btn btn-primary" style="max-width:280px" onclick="showDashboard()">
+          <button class="btn btn-primary" style="max-width:280px" onclick="alert('Redirecting to your Candidly account…')">
             Go to my account →
           </button>
           <p style="font-size:13px;color:var(--text-3);max-width:320px;line-height:1.5;">
@@ -990,10 +827,6 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function showDashboard() {
-      document.getElementById('dashboard-page').classList.add('active');
-      window.scrollTo({ top: 0 });
-    }
 
     /* ═══════════════ TAB SWITCH (screen 1) ═══════════════ */
     function switchTab(tab) {
