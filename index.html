@@ -10,33 +10,44 @@
   <style>
     /* ── Reset ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    button { font-family: inherit; }
 
     /* ── Tokens ── */
     :root {
-      --color-brand:          #265ddc;
-      --color-brand-bg:       #eff4ff;
-      --color-text-primary:   #0d0d12;
-      --color-text-brand:     #265ddc;
-      --color-text-disabled:  #676d7a;
-      --color-text-white:     #ffffff;
-      --color-border-base:    #e2e4eb;
-      --color-border-strong:  #8f95a3;
-      --color-bg-neutral:     #ffffff;
-      --color-bg-readonly:    #fafbfc;
-      --color-surface:        #ffffff;
-      --radius-md:            8px;
-      --radius-lg:            12px;
-      --radius-full:          999px;
-      --font:                 'DM Sans', sans-serif;
+      --brand:         #265ddc;
+      --brand-bg:      #eff4ff;
+      --brand-hover:   #1e4fba;
+      --green:         #16a34a;
+      --green-bg:      #dcfce7;
+      --green-border:  #bbf7d0;
+      --amber:         #d97706;
+      --amber-bg:      #fffbeb;
+      --amber-border:  #fde68a;
+      --amber-dark:    #92400e;
+      --red:           #dc2626;
+      --red-bg:        #fee2e2;
+      --red-border:    #fecaca;
+      --text:          #0d0d12;
+      --text-2:        #4b5563;
+      --text-3:        #676d7a;
+      --border:        #e2e4eb;
+      --border-2:      #8f95a3;
+      --bg:            #ffffff;
+      --bg-2:          #fafbfc;
+      --bg-3:          #f3f4f6;
+      --surface:       #ffffff;
+      --r-sm:          6px;
+      --r-md:          8px;
+      --r-lg:          12px;
+      --r-full:        999px;
+      --font:          'DM Sans', sans-serif;
     }
 
-    /* ── Page ── */
-    html, body { height: 100%; }
+    html, body { min-height: 100%; }
 
     body {
       font-family: var(--font);
-      background-color: #f5f6fa;
-      min-height: 100vh;
+      background: #f8f9fc;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -44,402 +55,44 @@
       overflow-x: hidden;
     }
 
-    /* ── Decorative background shapes ── */
+    /* ── Background shapes ── */
     .bg-shapes {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-      background: #f8f9fc;
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 0; overflow: hidden;
     }
+    .shape { position: absolute; border-radius: 50%; }
+    .s1 { top:-120px; right:-80px; width:380px; height:380px; border:80px solid #f0b8a8; opacity:.4; }
+    .s2 { top:60px; right:-40px; width:220px; height:220px; border:55px solid #d4b8e8; opacity:.3; }
+    .s3 { bottom:-60px; left:-120px; width:340px; height:340px; background:#afd4f0; opacity:.45; }
+    .s4 { bottom:-80px; right:-60px; width:260px; height:260px; border:60px solid #f5c5b0; opacity:.35; }
+    .s5 { bottom:30px; left:50%; transform:translateX(-50%); width:80px; height:80px; background:#c4b5e8; opacity:.4; }
 
-    /* Top-right coral/pink arc */
-    .shape-tr {
-      position: absolute;
-      top: -120px;
-      right: -80px;
-      width: 380px;
-      height: 380px;
-      border-radius: 50%;
-      border: 80px solid #f0b8a8;
-      opacity: 0.45;
-    }
-
-    /* Top-right smaller purple arc */
-    .shape-tr2 {
-      position: absolute;
-      top: 60px;
-      right: -40px;
-      width: 220px;
-      height: 220px;
-      border-radius: 50%;
-      border: 55px solid #d4b8e8;
-      opacity: 0.35;
-    }
-
-    /* Bottom-left blue half-circle */
-    .shape-bl {
-      position: absolute;
-      bottom: -60px;
-      left: -120px;
-      width: 340px;
-      height: 340px;
-      border-radius: 50%;
-      background: #afd4f0;
-      opacity: 0.5;
-    }
-
-    /* Bottom-right peach arc */
-    .shape-br {
-      position: absolute;
-      bottom: -80px;
-      right: -60px;
-      width: 260px;
-      height: 260px;
-      border-radius: 50%;
-      border: 60px solid #f5c5b0;
-      opacity: 0.4;
-    }
-
-    /* Bottom-center small purple blob */
-    .shape-bc {
-      position: absolute;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background: #c4b5e8;
-      opacity: 0.45;
-    }
-
-    /* ── Page layout ── */
+    /* ── Page wrapper ── */
     .page {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 48px 24px 64px;
+      position: relative; z-index: 1;
+      width: 100%; min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 48px 24px 80px;
     }
 
-    /* ── Logo ── */
+    /* ── Logo bar ── */
     .logo-bar {
-      width: 100%;
-      max-width: 700px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      margin-bottom: 60px;
+      width: 100%; max-width: 700px;
+      display: flex; align-items: center; gap: 4px;
+      margin-bottom: 48px;
     }
+    .logo-symbol { display:flex; align-items:center; padding:4px; flex-shrink:0; }
+    .logo-icon   { width:24px; height:24px; display:block; }
+    .logo-wordmark { width:98.235px; height:22px; display:block; flex-shrink:0; }
 
-    /* Symbol-only: 4px padding around a 24×24 icon = 32×32 container */
-    .logo-symbol {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 4px;
-      flex-shrink: 0;
-    }
-
-    .logo-icon {
-      width: 24px;
-      height: 24px;
-      display: block;
-    }
-
-    /* Wordmark: exact Figma dimensions, never scaled */
-    .logo-wordmark {
-      width: 98.235px;
-      height: 22px;
-      display: block;
-      flex-shrink: 0;
-    }
-
-    /* ── Modal card ── */
+    /* ── Card ── */
     .card {
-      background: var(--color-bg-neutral);
-      border: 1px solid var(--color-border-base);
-      border-radius: var(--radius-lg);
-      width: 100%;
-      max-width: 560px;
-      min-width: 320px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      width: 100%; max-width: 560px; min-width: 300px;
       padding: 32px;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    }
-
-    /* ── Top content ── */
-    .top-content {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .heading-group {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .heading {
-      font-size: 26px;
-      font-weight: 700;
-      line-height: 32px;
-      color: var(--color-text-primary);
-      font-optical-sizing: auto;
-    }
-
-    .subheading {
-      font-size: 16px;
-      font-weight: 400;
-      line-height: 1.5;
-      color: var(--color-text-primary);
-    }
-
-    /* ── Toggle tabs ── */
-    .toggle-group {
-      display: flex;
-      border: 1px solid var(--color-border-base);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-    }
-
-    .toggle-tab {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      min-height: 56px;
-      padding: 16px 24px;
-      font-family: var(--font);
-      font-size: 16px;
-      font-weight: 500;
-      cursor: pointer;
-      border: none;
-      background: var(--color-bg-neutral);
-      color: var(--color-text-primary);
-      transition: background 0.15s, color 0.15s;
-      position: relative;
-    }
-
-    .toggle-tab + .toggle-tab {
-      border-left: 1px solid var(--color-border-base);
-    }
-
-    .toggle-tab.active {
-      background: var(--color-brand-bg);
-      color: var(--color-text-brand);
-    }
-
-    .toggle-tab .check-icon {
-      width: 20px;
-      height: 20px;
-      object-fit: contain;
-    }
-
-    /* ── Google button ── */
-    .btn-google {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      width: 100%;
-      min-height: 48px;
-      padding: 12px 24px;
-      border: 1px solid var(--color-brand);
-      border-radius: var(--radius-full);
-      background: var(--color-bg-neutral);
-      color: var(--color-text-brand);
-      font-family: var(--font);
-      font-size: 16px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background 0.15s;
-    }
-
-    .btn-google:hover { background: var(--color-brand-bg); }
-
-    .btn-google img {
-      width: 20px;
-      height: 20px;
-      object-fit: contain;
-    }
-
-    /* ── Divider ── */
-    .divider {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .divider-line {
-      flex: 1;
-      height: 1px;
-      background: var(--color-border-base);
-    }
-
-    .divider-label {
-      font-size: 14px;
-      font-weight: 400;
-      color: var(--color-text-disabled);
-      white-space: nowrap;
-    }
-
-    /* ── Fields stack ── */
-    .fields-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    /* ── Floating label text field ── */
-    .field-wrapper {
-      position: relative;
-    }
-
-    .field-wrapper input {
-      width: 100%;
-      background: var(--color-bg-neutral);
-      border: 1px solid var(--color-border-strong);
-      border-radius: var(--radius-md);
-      padding: 16px 12px 12px;
-      font-family: var(--font);
-      font-size: 16px;
-      font-weight: 400;
-      color: var(--color-text-primary);
-      outline: none;
-      transition: border-color 0.15s;
-      min-height: 56px;
-    }
-
-    .field-wrapper input:focus {
-      border-color: var(--color-brand);
-    }
-
-    .field-wrapper .float-label {
-      position: absolute;
-      top: -9px;
-      left: 8px;
-      background: var(--color-surface);
-      padding: 0 4px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      pointer-events: none;
-    }
-
-    .float-label .label-text {
-      font-size: 12px;
-      font-weight: 500;
-      line-height: 1.4;
-      color: var(--color-text-primary);
-      white-space: nowrap;
-    }
-
-    .float-label .label-required {
-      font-size: 12px;
-      font-weight: 500;
-      line-height: 1.4;
-      color: var(--color-text-primary);
-      white-space: nowrap;
-    }
-
-    /* ── Primary button ── */
-    .btn-primary {
-      width: 100%;
-      min-height: 48px;
-      padding: 12px 24px;
-      border: none;
-      border-radius: var(--radius-full);
-      background: var(--color-brand);
-      color: var(--color-text-white);
-      font-family: var(--font);
-      font-size: 16px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background 0.15s, opacity 0.15s;
-    }
-
-    .btn-primary:hover { opacity: 0.9; }
-    .btn-primary:active { opacity: 0.8; }
-
-    /* ── Link ── */
-    .link {
-      display: flex;
-      justify-content: center;
-    }
-
-    .link a {
-      font-size: 16px;
-      font-weight: 400;
-      line-height: 1.5;
-      color: var(--color-text-brand);
-      text-decoration: none;
-    }
-
-    .link a:hover { text-decoration: underline; }
-
-    /* ── Helper box ── */
-    .helper-box {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      background: var(--color-bg-readonly);
-      border: 1px solid var(--color-border-base);
-      border-radius: var(--radius-md);
-      padding: 8px 16px 8px 8px;
-    }
-
-    .helper-icon {
-      width: 20px;
-      height: 20px;
-      object-fit: contain;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-
-    .helper-content {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .helper-title {
-      font-size: 14px;
-      font-weight: 700;
-      line-height: 1.5;
-      color: var(--color-text-primary);
-    }
-
-    .helper-body {
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 1.5;
-      color: var(--color-text-primary);
-    }
-
-    .helper-body a {
-      color: var(--color-text-brand);
-      text-decoration: underline;
-    }
-
-    /* ── Tab panels ── */
-    .tab-panel { display: none; }
-    .tab-panel.active { display: contents; }
-
-    /* Magic link panel specifics */
-    .field-email {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
+      box-shadow: 0 2px 16px rgba(0,0,0,.07);
     }
 
     /* ── Screen switching ── */
@@ -447,203 +100,340 @@
     .screen.active { display: flex; }
 
     /* ── Back link ── */
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--color-text-brand);
-      text-decoration: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-      font-family: var(--font);
-    }
-    .back-link:hover { text-decoration: underline; }
-
-    /* ── Recovery: icon ── */
-    .recovery-icon-wrap {
-      width: 48px;
-      height: 48px;
-      background: #fff7ed;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    /* ── Recovery: heading group ── */
-    .recovery-heading {
-      font-size: 22px;
-      font-weight: 700;
-      line-height: 1.3;
-      color: var(--color-text-primary);
-    }
-
-    .recovery-subheading {
-      font-size: 15px;
-      font-weight: 400;
-      line-height: 1.5;
-      color: #4b5563;
-      margin-top: 4px;
-    }
-
-    /* ── Recovery: info box ── */
-    .recovery-info-box {
-      background: #fffbeb;
-      border: 1px solid #fde68a;
-      border-radius: var(--radius-md);
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .terminated-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 2px 8px;
-      background: #fef3c7;
-      border: 1px solid #fcd34d;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 700;
-      color: #92400e;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
+    .back {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 14px; font-weight: 500; color: var(--brand);
+      background: none; border: none; cursor: pointer; padding: 0;
       width: fit-content;
     }
+    .back:hover { text-decoration: underline; }
 
-    .recovery-info-text {
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 1.5;
-      color: #78350f;
+    /* ── Headings ── */
+    .h1 { font-size: 26px; font-weight: 700; line-height: 1.25; color: var(--text); }
+    .h2 { font-size: 20px; font-weight: 700; line-height: 1.3;  color: var(--text); }
+    .sub { font-size: 15px; font-weight: 400; line-height: 1.55; color: var(--text-2); margin-top: 4px; }
+
+    /* ── Icon bubble ── */
+    .icon-bubble {
+      width: 48px; height: 48px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .icon-bubble.amber  { background: var(--amber-bg);  border: 1px solid var(--amber-border); }
+    .icon-bubble.green  { background: var(--green-bg);  border: 1px solid var(--green-border); }
+    .icon-bubble.red    { background: var(--red-bg);    border: 1px solid var(--red-border); }
+    .icon-bubble.blue   { background: var(--brand-bg);  border: 1px solid #bfdbfe; }
+
+    /* ── Buttons ── */
+    .btn {
+      width: 100%; min-height: 48px; padding: 12px 24px;
+      border: none; border-radius: var(--r-full);
+      font-size: 16px; font-weight: 500; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: opacity .15s, background .15s;
+    }
+    .btn-primary { background: var(--brand); color: #fff; }
+    .btn-primary:hover { background: var(--brand-hover); }
+    .btn-outline {
+      background: var(--bg); color: var(--brand);
+      border: 1.5px solid var(--brand);
+    }
+    .btn-outline:hover { background: var(--brand-bg); }
+    .btn-ghost {
+      background: none; color: var(--brand);
+      font-size: 14px; min-height: 36px; width: auto; padding: 8px 12px;
+    }
+    .btn-ghost:hover { background: var(--brand-bg); border-radius: var(--r-md); }
+    .btn-google {
+      background: var(--bg); color: var(--brand);
+      border: 1.5px solid var(--brand);
+    }
+    .btn-google:hover { background: var(--brand-bg); }
+
+    /* ── Text link ── */
+    .tlink { color: var(--brand); font-size: 14px; font-weight: 500; text-decoration: none; cursor: pointer; background: none; border: none; padding: 0; }
+    .tlink:hover { text-decoration: underline; }
+
+    /* ── Toggle tabs ── */
+    .toggle-group { display:flex; border:1px solid var(--border); border-radius:var(--r-md); overflow:hidden; }
+    .toggle-tab {
+      flex:1; display:flex; align-items:center; justify-content:center; gap:8px;
+      min-height:56px; padding:16px 24px;
+      font-size:16px; font-weight:500; cursor:pointer;
+      border:none; background:var(--bg); color:var(--text);
+      transition: background .15s, color .15s;
+    }
+    .toggle-tab + .toggle-tab { border-left:1px solid var(--border); }
+    .toggle-tab.active { background:var(--brand-bg); color:var(--brand); }
+    .check-icon { width:20px; height:20px; }
+
+    /* ── Divider ── */
+    .divider { display:flex; align-items:center; gap:8px; }
+    .divider-line { flex:1; height:1px; background:var(--border); }
+    .divider-label { font-size:14px; color:var(--text-3); white-space:nowrap; }
+
+    /* ── Floating-label field ── */
+    .field { position: relative; }
+    .field input {
+      width:100%; background:var(--bg);
+      border:1px solid var(--border-2); border-radius:var(--r-md);
+      padding:16px 12px 12px; font-family:var(--font);
+      font-size:16px; color:var(--text); outline:none;
+      transition:border-color .15s; min-height:56px;
+    }
+    .field input:focus { border-color: var(--brand); }
+    .field input.error { border-color: var(--red); }
+    .field .flabel {
+      position:absolute; top:-9px; left:8px;
+      background:var(--surface); padding:0 4px;
+      display:flex; align-items:center; gap:4px; pointer-events:none;
+    }
+    .flabel span { font-size:12px; font-weight:500; line-height:1.4; color:var(--text); white-space:nowrap; }
+
+    /* ── Helper / info box ── */
+    .info-box {
+      display:flex; align-items:flex-start; gap:10px;
+      border-radius:var(--r-md); padding:14px 16px;
+    }
+    .info-box.neutral { background:var(--bg-2);   border:1px solid var(--border); }
+    .info-box.amber   { background:var(--amber-bg); border:1px solid var(--amber-border); }
+    .info-box.red     { background:var(--red-bg);   border:1px solid var(--red-border); }
+    .info-box.green   { background:var(--green-bg); border:1px solid var(--green-border); }
+    .info-box svg { flex-shrink:0; margin-top:1px; }
+    .info-box-body { display:flex; flex-direction:column; gap:2px; }
+    .info-box-title { font-size:14px; font-weight:700; line-height:1.5; }
+    .info-box-title.amber { color: var(--amber-dark); }
+    .info-box-title.red   { color: var(--red); }
+    .info-box-title.green { color: var(--green); }
+    .info-box-title.neutral { color: var(--text); }
+    .info-box-text  { font-size:14px; font-weight:400; line-height:1.5; color:var(--text-2); }
+    .info-box-text a { color:var(--brand); text-decoration:underline; }
+
+    /* ══════════════════════════════════════════
+       SCREEN 1 — TERMINATED HARD BLOCK
+    ══════════════════════════════════════════ */
+
+    .badge {
+      display:inline-flex; align-items:center; gap:5px;
+      padding:3px 10px; border-radius:var(--r-sm);
+      font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.06em;
+      width:fit-content;
+    }
+    .badge.amber { background:#fef3c7; border:1px solid #fcd34d; color:var(--amber-dark); }
+
+    .data-status-grid {
+      display:grid; grid-template-columns:1fr 1fr; gap:10px;
+    }
+    .data-status-card {
+      border-radius:var(--r-md); padding:14px;
+      display:flex; flex-direction:column; gap:8px;
+    }
+    .data-status-card.kept   { background:var(--green-bg); border:1px solid var(--green-border); }
+    .data-status-card.paused { background:var(--amber-bg); border:1px solid var(--amber-border); }
+    .data-status-label {
+      display:flex; align-items:center; gap:6px;
+      font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.05em;
+    }
+    .data-status-label.kept   { color:var(--green); }
+    .data-status-label.paused { color:var(--amber); }
+    .data-status-items { display:flex; flex-direction:column; gap:4px; }
+    .data-status-item { font-size:13px; color:var(--text-2); line-height:1.4; }
+
+    .options-stack { display:flex; flex-direction:column; gap:10px; }
+
+    .option-card {
+      width:100%; display:flex; align-items:center; gap:12px;
+      border-radius:var(--r-md); padding:14px 16px;
+      border:none; cursor:pointer; font-family:var(--font); text-align:left;
+      transition:opacity .15s, box-shadow .15s;
+    }
+    .option-card.primary {
+      background:var(--brand); color:#fff;
+    }
+    .option-card.primary:hover { background:var(--brand-hover); }
+    .option-card.secondary {
+      background:var(--bg); color:var(--text);
+      border:1.5px solid var(--border);
+    }
+    .option-card.secondary:hover { border-color:var(--brand); box-shadow:0 0 0 3px var(--brand-bg); }
+    .option-card-icon {
+      width:36px; height:36px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    }
+    .option-card.primary .option-card-icon { background:rgba(255,255,255,.2); }
+    .option-card.secondary .option-card-icon { background:var(--bg-2); border:1px solid var(--border); }
+    .option-card-body { flex:1; }
+    .option-card-title { font-size:15px; font-weight:600; line-height:1.3; }
+    .option-card-desc  { font-size:13px; font-weight:400; line-height:1.4; margin-top:2px; }
+    .option-card.primary .option-card-desc { opacity:.8; }
+    .option-card.secondary .option-card-desc { color:var(--text-3); }
+
+    .tertiary-row {
+      display:flex; justify-content:center; padding-top:4px;
     }
 
-    .recovery-info-text strong {
-      font-weight: 600;
-    }
+    /* ══════════════════════════════════════════
+       SCREEN 3 — OTP
+    ══════════════════════════════════════════ */
 
-    /* ── Recovery: primary CTA ── */
-    .btn-primary-arrow {
-      width: 100%;
-      min-height: 48px;
-      padding: 12px 24px;
-      border: none;
-      border-radius: var(--radius-full);
-      background: var(--color-brand);
-      color: var(--color-text-white);
-      font-family: var(--font);
-      font-size: 16px;
-      font-weight: 500;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      transition: opacity 0.15s;
+    .otp-group {
+      display:flex; gap:10px; justify-content:center;
     }
-    .btn-primary-arrow:hover { opacity: 0.9; }
-
-    /* ── Recovery: other options ── */
-    .other-options {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
+    .otp-box {
+      width:52px; height:60px;
+      border:1.5px solid var(--border-2); border-radius:var(--r-md);
+      font-size:24px; font-weight:700; text-align:center;
+      color:var(--text); background:var(--bg);
+      outline:none; transition:border-color .15s, box-shadow .15s;
+      caret-color: var(--brand);
     }
+    .otp-box:focus { border-color:var(--brand); box-shadow:0 0 0 3px var(--brand-bg); }
+    .otp-box.filled { border-color:var(--brand); }
+    .otp-box.error  { border-color:var(--red); background:var(--red-bg); }
 
-    .other-options-label {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--color-text-disabled);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 12px;
+    .resend-row { display:flex; align-items:center; justify-content:center; gap:6px; }
+    .resend-timer { font-size:13px; color:var(--text-3); }
+    .resend-btn { font-size:13px; font-weight:600; color:var(--brand); background:none; border:none; cursor:pointer; padding:0; }
+    .resend-btn:disabled { color:var(--text-3); cursor:default; }
+    .resend-btn:not(:disabled):hover { text-decoration:underline; }
+
+    /* attempt bar */
+    .attempt-bar {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:10px 12px; border-radius:var(--r-md);
+      background:var(--red-bg); border:1px solid var(--red-border);
     }
-
-    .option-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 0;
-      border-top: 1px solid var(--color-border-base);
+    .attempt-text { font-size:13px; font-weight:500; color:var(--red); }
+    .attempt-dots { display:flex; gap:5px; }
+    .attempt-dot {
+      width:8px; height:8px; border-radius:50%;
     }
+    .attempt-dot.used { background:var(--red); }
+    .attempt-dot.open { background:var(--red-border); }
 
-    .option-row:last-child {
-      border-bottom: 1px solid var(--color-border-base);
+    /* ══════════════════════════════════════════
+       SCREEN 6 — PASSWORD STRENGTH
+    ══════════════════════════════════════════ */
+
+    .strength-meter { display:flex; flex-direction:column; gap:8px; margin-top:8px; }
+    .strength-track {
+      display:flex; gap:4px; height:4px;
     }
-
-    .option-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: var(--color-bg-readonly);
-      border: 1px solid var(--color-border-base);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+    .strength-seg {
+      flex:1; border-radius:2px; background:var(--border);
+      transition:background .25s;
     }
-
-    .option-text {
-      flex: 1;
+    .strength-seg.active.s0 { background:#dc2626; }
+    .strength-seg.active.s1 { background:#f97316; }
+    .strength-seg.active.s2 { background:#eab308; }
+    .strength-seg.active.s3 { background:#16a34a; }
+    .strength-label {
+      font-size:12px; font-weight:600;
+      transition:color .25s;
     }
+    .strength-label.s0 { color:#dc2626; }
+    .strength-label.s1 { color:#f97316; }
+    .strength-label.s2 { color:#eab308; }
+    .strength-label.s3 { color:#16a34a; }
 
-    .option-title {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--color-text-primary);
+    .pw-reqs { display:flex; flex-direction:column; gap:5px; margin-top:4px; }
+    .pw-req { display:flex; align-items:center; gap:7px; font-size:13px; color:var(--text-3); }
+    .pw-req.met { color:var(--green); }
+    .pw-req svg { flex-shrink:0; }
+
+    /* ══════════════════════════════════════════
+       SCREEN 8 — DASHBOARD
+    ══════════════════════════════════════════ */
+
+    /* The dashboard replaces the whole page */
+    #dashboard-page {
+      display:none;
+      position:fixed; inset:0; z-index:100;
+      background:#f3f5fb;
+      overflow-y:auto;
     }
+    #dashboard-page.active { display:block; }
 
-    .option-desc {
-      font-size: 12px;
-      font-weight: 400;
-      color: var(--color-text-disabled);
-      margin-top: 1px;
+    .dash-header {
+      background:#fff; border-bottom:1px solid var(--border);
+      padding:0 32px; height:60px;
+      display:flex; align-items:center; justify-content:space-between;
+      position:sticky; top:0; z-index:10;
     }
-
-    .option-chevron {
-      color: var(--color-border-strong);
-      flex-shrink: 0;
+    .dash-logo { display:flex; align-items:center; gap:4px; }
+    .dash-user { display:flex; align-items:center; gap:10px; }
+    .dash-avatar {
+      width:32px; height:32px; border-radius:50%;
+      background:var(--brand); color:#fff;
+      font-size:13px; font-weight:700;
+      display:flex; align-items:center; justify-content:center;
     }
+    .dash-username { font-size:14px; font-weight:500; color:var(--text); }
 
-    .option-row-btn {
-      width: 100%;
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 0;
-      font-family: var(--font);
-      text-align: left;
-      border-top: 1px solid var(--color-border-base);
+    .dash-body { max-width:760px; margin:0 auto; padding:32px 24px 80px; }
+
+    .dash-banner {
+      background:var(--amber-bg); border:1px solid var(--amber-border);
+      border-radius:var(--r-md); padding:12px 16px;
+      display:flex; align-items:center; gap:10px;
+      margin-bottom:28px;
     }
+    .dash-banner-text { font-size:14px; font-weight:500; color:var(--amber-dark); }
+    .dash-banner-text strong { font-weight:700; }
 
-    .option-row-btn:last-child {
-      border-bottom: 1px solid var(--color-border-base);
+    .dash-greeting { font-size:22px; font-weight:700; color:var(--text); margin-bottom:20px; }
+
+    .dash-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; margin-bottom:28px; }
+
+    .dash-card {
+      background:#fff; border:1px solid var(--border); border-radius:var(--r-lg); padding:20px;
+      display:flex; flex-direction:column; gap:12px;
     }
-
-    .option-row-btn:hover .option-title { color: var(--color-text-brand); }
-
-    /* ── Add email screen ── */
-    .add-email-intro {
-      font-size: 14px;
-      line-height: 1.5;
-      color: #4b5563;
+    .dash-card-label { font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.06em; color:var(--text-3); }
+    .dash-card-value { font-size:22px; font-weight:700; color:var(--text); }
+    .dash-card-sub   { font-size:13px; color:var(--text-3); }
+    .dash-card-action {
+      display:inline-flex; align-items:center; gap:5px;
+      font-size:13px; font-weight:600; color:var(--brand);
+      text-decoration:none; background:none; border:none; cursor:pointer; padding:0;
     }
+    .dash-card-action:hover { text-decoration:underline; }
+
+    .dash-exit-ramp {
+      background: linear-gradient(135deg, #1e3a8a 0%, #265ddc 100%);
+      border-radius:var(--r-lg); padding:28px 24px;
+      display:flex; align-items:center; justify-content:space-between; gap:20px;
+    }
+    .dash-exit-text { flex:1; }
+    .dash-exit-label { font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:rgba(255,255,255,.65); margin-bottom:6px; }
+    .dash-exit-heading { font-size:18px; font-weight:700; color:#fff; line-height:1.3; margin-bottom:6px; }
+    .dash-exit-sub { font-size:14px; color:rgba(255,255,255,.75); line-height:1.5; }
+    .dash-exit-btn {
+      background:#fff; color:var(--brand);
+      border:none; border-radius:var(--r-full);
+      padding:12px 22px; font-size:14px; font-weight:700;
+      cursor:pointer; white-space:nowrap; flex-shrink:0;
+      transition:opacity .15s;
+    }
+    .dash-exit-btn:hover { opacity:.9; }
+
+    .dash-logout {
+      display:block; text-align:center; margin-top:32px;
+      font-size:14px; color:var(--text-3); text-decoration:none; cursor:pointer;
+      background:none; border:none;
+    }
+    .dash-logout:hover { color:var(--red); text-decoration:underline; }
 
     /* ── Responsive ── */
-    @media (max-width: 480px) {
-      .card { padding: 24px 16px; }
-      .heading { font-size: 22px; line-height: 28px; }
-      .logo-bar { margin-bottom: 40px; }
+    @media (max-width:520px) {
+      .card { padding:24px 16px; }
+      .h1   { font-size:22px; }
+      .h2   { font-size:18px; }
+      .logo-bar { margin-bottom:32px; }
+      .otp-box { width:44px; height:54px; font-size:20px; }
+      .data-status-grid { grid-template-columns:1fr; }
+      .dash-exit-ramp { flex-direction:column; }
+      .dash-header { padding:0 16px; }
+      .dash-body { padding:20px 16px 60px; }
     }
   </style>
 </head>
@@ -651,412 +441,812 @@
 
   <!-- Background shapes -->
   <div class="bg-shapes" aria-hidden="true">
-    <div class="shape-tr"></div>
-    <div class="shape-tr2"></div>
-    <div class="shape-bl"></div>
-    <div class="shape-br"></div>
-    <div class="shape-bc"></div>
+    <div class="shape s1"></div>
+    <div class="shape s2"></div>
+    <div class="shape s3"></div>
+    <div class="shape s4"></div>
+    <div class="shape s5"></div>
   </div>
 
+  <!-- ══════════════════════════════════════════════════════
+       SCREEN 8 — READ-ONLY DASHBOARD (full-page overlay)
+  ══════════════════════════════════════════════════════ -->
+  <div id="dashboard-page" role="main" aria-label="Your Candidly dashboard">
+    <header class="dash-header">
+      <div class="dash-logo">
+        <div class="logo-symbol">
+          <img class="logo-icon" src="https://www.figma.com/api/mcp/asset/40fdc83f-08b7-48d9-bf94-b941b5fc8eb9" alt="Candidly icon" />
+        </div>
+        <img class="logo-wordmark" src="https://www.figma.com/api/mcp/asset/3aff0913-894e-4d1a-9082-b7a99b210fce" alt="candidly" />
+      </div>
+      <div class="dash-user">
+        <div class="dash-avatar" aria-hidden="true">AC</div>
+        <span class="dash-username">Alex Chen</span>
+      </div>
+    </header>
+
+    <div class="dash-body">
+      <!-- Read-only banner -->
+      <div class="dash-banner" role="alert">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <circle cx="9" cy="9" r="7.5" stroke="#d97706" stroke-width="1.4"/>
+          <path d="M9 5.5v4M9 11.5h.01" stroke="#d97706" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+        <p class="dash-banner-text"><strong>Employer paused · </strong>Your data is read-only. Employer contributions are suspended until re-enrollment.</p>
+      </div>
+
+      <h1 class="dash-greeting">Welcome back, Alex 👋</h1>
+
+      <!-- Data cards -->
+      <div class="dash-grid">
+        <div class="dash-card">
+          <p class="dash-card-label">Student Loans</p>
+          <p class="dash-card-value">$24,340</p>
+          <p class="dash-card-sub">3 loans tracked</p>
+          <button class="dash-card-action" onclick="alert('Loan tracker — read-only view')">
+            View loans
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M8 3.5L11.5 7 8 10.5" stroke="#265ddc" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+        <div class="dash-card">
+          <p class="dash-card-label">Financial Snapshot</p>
+          <p class="dash-card-value">Mar 2025</p>
+          <p class="dash-card-sub">Last updated 18 days ago</p>
+          <button class="dash-card-action" onclick="alert('Snapshots — read-only view')">
+            View snapshots
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M8 3.5L11.5 7 8 10.5" stroke="#265ddc" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+        <div class="dash-card">
+          <p class="dash-card-label">Documents</p>
+          <p class="dash-card-value">12</p>
+          <p class="dash-card-sub">Statements &amp; letters saved</p>
+          <button class="dash-card-action" onclick="alert('Documents — read-only view')">
+            View documents
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M8 3.5L11.5 7 8 10.5" stroke="#265ddc" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+        <div class="dash-card">
+          <p class="dash-card-label">Employer Contributions</p>
+          <p class="dash-card-value" style="font-size:16px;color:var(--amber);margin-top:4px;">Paused</p>
+          <p class="dash-card-sub">Active when re-enrolled with an employer</p>
+        </div>
+      </div>
+
+      <!-- Exit ramp -->
+      <div class="dash-exit-ramp">
+        <div class="dash-exit-text">
+          <p class="dash-exit-label">Still paying off loans?</p>
+          <h2 class="dash-exit-heading">Find a new employer benefit</h2>
+          <p class="dash-exit-sub">Candidly works with 500+ companies. Re-enroll with your next employer to resume contributions.</p>
+        </div>
+        <button class="dash-exit-btn" onclick="alert('Employer search — coming soon')">
+          Find employers →
+        </button>
+      </div>
+
+      <button class="dash-logout" onclick="showScreen('login'); document.getElementById('dashboard-page').classList.remove('active');">
+        Sign out
+      </button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       MAIN PAGE — card-based screens 1–7
+  ══════════════════════════════════════════════════════ -->
   <div class="page">
 
     <!-- Logo -->
     <div class="logo-bar">
       <div class="logo-symbol">
-        <img
-          class="logo-icon"
-          src="https://www.figma.com/api/mcp/asset/40fdc83f-08b7-48d9-bf94-b941b5fc8eb9"
-          alt="Candidly icon"
-        />
+        <img class="logo-icon" src="https://www.figma.com/api/mcp/asset/40fdc83f-08b7-48d9-bf94-b941b5fc8eb9" alt="Candidly icon" />
       </div>
-      <img
-        class="logo-wordmark"
-        src="https://www.figma.com/api/mcp/asset/3aff0913-894e-4d1a-9082-b7a99b210fce"
-        alt="candidly"
-      />
+      <img class="logo-wordmark" src="https://www.figma.com/api/mcp/asset/3aff0913-894e-4d1a-9082-b7a99b210fce" alt="candidly" />
     </div>
 
-    <!-- Card -->
-    <div class="card" role="main">
+    <div class="card">
 
-      <!-- ═══════════════════════════════════════════
-           SCREEN 1: Login
-      ════════════════════════════════════════════ -->
+      <!-- ════════════════════════════════
+           SCREEN 1 — Login
+      ════════════════════════════════ -->
       <div id="screen-login" class="screen active">
 
-        <!-- Heading + tabs -->
-        <div class="top-content">
-          <div class="heading-group">
-            <h1 class="heading">Log in to a debt-free future</h1>
-            <p class="subheading">Get a one-time magic link sent to your email, or log in with your username or email and password.</p>
-          </div>
-
-          <!-- Toggle tabs -->
-          <div class="toggle-group" role="tablist" aria-label="Login method">
-            <button
-              class="toggle-tab"
-              id="tab-magic"
-              role="tab"
-              aria-selected="false"
-              aria-controls="panel-magic"
-              onclick="switchTab('magic')"
-            >
-              Magic link
-            </button>
-            <button
-              class="toggle-tab active"
-              id="tab-login"
-              role="tab"
-              aria-selected="true"
-              aria-controls="panel-login"
-              onclick="switchTab('login')"
-            >
-              <img
-                class="check-icon"
-                src="https://www.figma.com/api/mcp/asset/550ba3f9-7e8e-4fb9-8691-dd3f7927ca87"
-                alt=""
-              />
-              Login
-            </button>
-          </div>
+        <div>
+          <h1 class="h1">Log in to a debt-free future</h1>
+          <p class="sub">Get a one-time magic link sent to your email, or log in with your username or email and password.</p>
         </div>
 
-        <!-- Google button -->
-        <button class="btn-google" type="button" aria-label="Log in with Google">
-          <img
-            src="https://www.figma.com/api/mcp/asset/95248e61-34cf-44aa-9c47-6d2721dd487e"
-            alt="Google logo"
-          />
+        <div class="toggle-group" role="tablist" aria-label="Login method">
+          <button class="toggle-tab" id="tab-magic" role="tab" aria-selected="false" onclick="switchTab('magic')">
+            Magic link
+          </button>
+          <button class="toggle-tab active" id="tab-login" role="tab" aria-selected="true" onclick="switchTab('login')">
+            <img class="check-icon" src="https://www.figma.com/api/mcp/asset/550ba3f9-7e8e-4fb9-8691-dd3f7927ca87" alt="" />
+            Login
+          </button>
+        </div>
+
+        <button class="btn btn-google" type="button" aria-label="Log in with Google">
+          <img src="https://www.figma.com/api/mcp/asset/95248e61-34cf-44aa-9c47-6d2721dd487e" alt="Google" width="20" height="20" />
           Log in with Google
         </button>
 
-        <!-- Divider -->
-        <div class="divider" role="separator" aria-hidden="true">
+        <div class="divider">
           <div class="divider-line"></div>
           <span class="divider-label">or</span>
           <div class="divider-line"></div>
         </div>
 
         <!-- Login panel -->
-        <div id="panel-login" role="tabpanel" aria-labelledby="tab-login" class="tab-panel active">
-          <div class="fields-stack">
-
-            <div class="field-wrapper">
-              <input
-                type="text"
-                id="email-username"
-                name="email-username"
-                autocomplete="username"
-                aria-label="Email or username (required)"
-                aria-required="true"
-              />
-              <div class="float-label">
-                <span class="label-text">Email or username</span>
-                <span class="label-required">(required)</span>
-              </div>
-            </div>
-
-            <div class="field-wrapper">
-              <input
-                type="password"
-                id="password"
-                name="password"
-                autocomplete="current-password"
-                aria-label="Password (required)"
-                aria-required="true"
-              />
-              <div class="float-label">
-                <span class="label-text">Password</span>
-                <span class="label-required">(required)</span>
-              </div>
-            </div>
-
-            <button class="btn-primary" type="button" onclick="handleLogin()">Log in</button>
-
-            <div class="link">
-              <a href="#">Forgot your password?</a>
-            </div>
-
+        <div id="panel-login" role="tabpanel" style="display:flex;flex-direction:column;gap:16px;">
+          <div class="field">
+            <input type="text" id="email-username" autocomplete="username" aria-label="Email or username (required)" aria-required="true" />
+            <div class="flabel"><span>Email or username</span><span style="color:var(--text-3)">(required)</span></div>
+          </div>
+          <div class="field">
+            <input type="password" id="password" autocomplete="current-password" aria-label="Password (required)" aria-required="true" />
+            <div class="flabel"><span>Password</span><span style="color:var(--text-3)">(required)</span></div>
+          </div>
+          <button class="btn btn-primary" onclick="handleLogin()">Log in</button>
+          <div style="text-align:center">
+            <button class="tlink" style="font-size:16px" onclick="void(0)">Forgot your password?</button>
           </div>
         </div>
 
         <!-- Magic link panel -->
-        <div id="panel-magic" role="tabpanel" aria-labelledby="tab-magic" class="tab-panel">
-          <div class="fields-stack">
-
-            <div class="field-wrapper">
-              <input
-                type="email"
-                id="magic-email"
-                name="magic-email"
-                autocomplete="email"
-                aria-label="Email address (required)"
-                aria-required="true"
-              />
-              <div class="float-label">
-                <span class="label-text">Email address</span>
-                <span class="label-required">(required)</span>
-              </div>
-            </div>
-
-            <button class="btn-primary" type="submit">Send magic link</button>
-
+        <div id="panel-magic" role="tabpanel" style="display:none;flex-direction:column;gap:16px;">
+          <div class="field">
+            <input type="email" id="magic-email" autocomplete="email" aria-label="Email address (required)" aria-required="true" />
+            <div class="flabel"><span>Email address</span><span style="color:var(--text-3)">(required)</span></div>
           </div>
+          <button class="btn btn-primary">Send magic link</button>
         </div>
 
-        <!-- Helper box -->
-        <div class="helper-box" role="note">
-          <img
-            class="helper-icon"
-            src="https://www.figma.com/api/mcp/asset/85049dea-98b5-4ae9-b2a8-0ee6cd80bce5"
-            alt="Info"
-          />
-          <div class="helper-content">
-            <p class="helper-title">Trouble logging in?</p>
-            <p class="helper-body">
-              If your employer provided access, reach out to us at
-              <a href="mailto:help@getcandidly.com">help@getcandidly.com</a>
-              and we'll help you get set up.
-            </p>
+        <div class="info-box neutral">
+          <img src="https://www.figma.com/api/mcp/asset/85049dea-98b5-4ae9-b2a8-0ee6cd80bce5" alt="" width="20" height="20" style="flex-shrink:0;margin-top:1px" />
+          <div class="info-box-body">
+            <p class="info-box-title neutral">Trouble logging in?</p>
+            <p class="info-box-text">If your employer provided access, reach out to us at <a href="mailto:help@getcandidly.com">help@getcandidly.com</a> and we'll help you get set up.</p>
           </div>
         </div>
 
       </div><!-- /screen-login -->
 
 
-      <!-- ═══════════════════════════════════════════
-           SCREEN 2: Terminated account — can't reach you
-      ════════════════════════════════════════════ -->
-      <div id="screen-recovery" class="screen">
+      <!-- ════════════════════════════════
+           SCREEN 1b — Terminated Hard Block
+      ════════════════════════════════ -->
+      <div id="screen-terminated" class="screen">
 
-        <!-- Back -->
-        <button class="back-link" onclick="showScreen('login')" aria-label="Back to login">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M10 12L6 8l4-4" stroke="#265ddc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+        <button class="back" onclick="showScreen('login')">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="#265ddc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           Back to log in
         </button>
 
-        <!-- Icon + heading -->
         <div style="display:flex;flex-direction:column;gap:12px;">
-          <div class="recovery-icon-wrap" aria-hidden="true">
-            <!-- Mail-off icon -->
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M3 7L9.5 12M21 7L14.5 12M3 7C3 5.895 3.895 5 5 5H19C20.105 5 21 5.895 21 7V17C21 18.105 20.105 19 19 19H5C3.895 19 3 18.105 3 17V7Z" stroke="#f97316" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <line x1="3" y1="3" x2="21" y2="21" stroke="#f97316" stroke-width="1.5" stroke-linecap="round"/>
+          <div class="icon-bubble amber">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+              <path d="M11 2C6.03 2 2 6.03 2 11s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 13.5c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm1-4.5h-2V6h2v5z" fill="#d97706"/>
             </svg>
           </div>
           <div>
-            <h2 class="recovery-heading">We can't reach you</h2>
-            <p class="recovery-subheading">Your work email is inactive. To unlock your data, you'll need to add a personal email ID.</p>
+            <h2 class="h2">Your access has been paused</h2>
+            <p class="sub" id="terminated-desc">Your work email is no longer active. Here's what that means for your account.</p>
           </div>
         </div>
 
-        <!-- Terminated account info box -->
-        <div class="recovery-info-box" role="alert">
-          <span class="terminated-badge">
-            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-              <circle cx="5" cy="5" r="4" stroke="#92400e" stroke-width="1.2"/>
-              <path d="M5 3v2.5M5 7h.01" stroke="#92400e" stroke-width="1.2" stroke-linecap="round"/>
-            </svg>
-            Terminated Account
-          </span>
-          <p class="recovery-info-text">
-            No verified contact method on file for
-            <strong id="terminated-email">alex.chen@acme.com</strong>.
-          </p>
+        <!-- Data status: kept vs paused -->
+        <div class="data-status-grid">
+          <div class="data-status-card kept">
+            <div class="data-status-label kept">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#16a34a" stroke-width="1.3"/><path d="M4 7l2.5 2.5L10 5" stroke="#16a34a" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Your data — kept
+            </div>
+            <div class="data-status-items">
+              <p class="data-status-item">· Loan tracker history</p>
+              <p class="data-status-item">· Financial snapshots</p>
+              <p class="data-status-item">· Documents &amp; statements</p>
+            </div>
+          </div>
+          <div class="data-status-card paused">
+            <div class="data-status-label paused">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#d97706" stroke-width="1.3"/><rect x="4.5" y="4" width="1.8" height="6" rx=".5" fill="#d97706"/><rect x="7.7" y="4" width="1.8" height="6" rx=".5" fill="#d97706"/></svg>
+              Paused
+            </div>
+            <div class="data-status-items">
+              <p class="data-status-item">· Employer contributions</p>
+              <p class="data-status-item">· Automatic payments</p>
+            </div>
+          </div>
         </div>
 
-        <!-- Primary CTA -->
-        <button class="btn-primary-arrow" onclick="showScreen('add-email')">
-          Add a personal email
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-
-        <!-- Other options -->
-        <div class="other-options">
-          <p class="other-options-label">Other options</p>
-
-          <button class="option-row-btn" onclick="alert('HR verification request sent.')">
-            <div class="option-icon" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <path d="M9 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6ZM3 14c0-2.21 2.686-4 6-4s6 1.79 6 4" stroke="#676d7a" stroke-width="1.4" stroke-linecap="round"/>
-                <path d="M13 10l1.5 1.5L16 10" stroke="#676d7a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+        <!-- No contact method info -->
+        <div class="info-box amber">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.5" stroke="#d97706" stroke-width="1.4"/><path d="M9 5.5v4M9 11.5h.01" stroke="#d97706" stroke-width="1.4" stroke-linecap="round"/></svg>
+          <div class="info-box-body">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+              <span class="badge amber">Terminated account</span>
             </div>
-            <div class="option-text">
-              <p class="option-title">Request HR verification</p>
-              <p class="option-desc">Ask your HR team to confirm your identity</p>
-            </div>
-            <svg class="option-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <path d="M6 4l4 4-4 4" stroke="#8f95a3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-
-          <button class="option-row-btn" onclick="window.location='mailto:help@getcandidly.com'">
-            <div class="option-icon" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <circle cx="9" cy="9" r="6.5" stroke="#676d7a" stroke-width="1.4"/>
-                <path d="M9 8v4M9 6h.01" stroke="#676d7a" stroke-width="1.4" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="option-text">
-              <p class="option-title">Contact support</p>
-              <p class="option-desc">Reach out to help@getcandidly.com</p>
-            </div>
-            <svg class="option-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <path d="M6 4l4 4-4 4" stroke="#8f95a3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
+            <p class="info-box-text">No verified contact method on file for <strong id="terminated-email" style="color:var(--amber-dark)">alex.chen@acme.com</strong>.</p>
+          </div>
         </div>
 
-      </div><!-- /screen-recovery -->
+        <!-- 3 ranked options -->
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <p style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text-3);margin-bottom:4px;">Recovery options</p>
+
+          <div class="options-stack">
+            <!-- Option 1: Primary -->
+            <button class="option-card primary" onclick="showScreen('add-email')">
+              <div class="option-card-icon">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.25 4.5h13.5M2.25 4.5c0-.828.672-1.5 1.5-1.5h10.5c.828 0 1.5.672 1.5 1.5M2.25 4.5v9c0 .828.672 1.5 1.5 1.5h10.5c.828 0 1.5-.672 1.5-1.5v-9M6 9l2.25 2.25L12 7.5" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="option-card-body">
+                <p class="option-card-title">Add a personal email</p>
+                <p class="option-card-desc">Recover access in ~2 minutes</p>
+              </div>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+
+            <!-- Option 2: Secondary -->
+            <button class="option-card secondary" onclick="alert('HR verification request submitted. Your HR team will contact you within 1–2 business days.')">
+              <div class="option-card-icon">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="6" r="2.5" stroke="#676d7a" stroke-width="1.3"/><path d="M3.75 15c0-2.9 2.35-5 5.25-5s5.25 2.1 5.25 5" stroke="#676d7a" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </div>
+              <div class="option-card-body">
+                <p class="option-card-title">Request HR verification</p>
+                <p class="option-card-desc">Your HR team confirms your identity (1–2 days)</p>
+              </div>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="#8f95a3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+
+          <!-- Option 3: Tertiary -->
+          <div class="tertiary-row">
+            <button class="tlink" onclick="window.location='mailto:help@getcandidly.com'">Contact support →</button>
+          </div>
+        </div>
+
+      </div><!-- /screen-terminated -->
 
 
-      <!-- ═══════════════════════════════════════════
-           SCREEN 3: Add personal email
-      ════════════════════════════════════════════ -->
+      <!-- ════════════════════════════════
+           SCREEN 2 — Add personal email
+      ════════════════════════════════ -->
       <div id="screen-add-email" class="screen">
 
-        <!-- Back -->
-        <button class="back-link" onclick="showScreen('recovery')" aria-label="Back">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M10 12L6 8l4-4" stroke="#265ddc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+        <button class="back" onclick="showScreen('terminated')">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="#265ddc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           Back
         </button>
 
-        <!-- Heading -->
         <div>
-          <h2 class="recovery-heading">Add a personal email</h2>
-          <p class="recovery-subheading">We'll send a verification link to confirm it's you. This email will be used to recover your account.</p>
+          <h2 class="h2">Add a personal email</h2>
+          <p class="sub">Enter a personal email you can access now. We'll send a verification code — not a link, so it works even if delivery is slow.</p>
         </div>
 
-        <!-- Email field -->
-        <div class="fields-stack">
-          <div class="field-wrapper">
-            <input
-              type="email"
-              id="personal-email"
-              name="personal-email"
-              autocomplete="email"
-              aria-label="Personal email address (required)"
-              aria-required="true"
-              placeholder=" "
-            />
-            <div class="float-label">
-              <span class="label-text">Personal email address</span>
-              <span class="label-required">(required)</span>
-            </div>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div class="field">
+            <input type="email" id="personal-email" autocomplete="email" aria-label="Personal email address (required)" aria-required="true" />
+            <div class="flabel"><span>Personal email address</span><span style="color:var(--text-3)">(required)</span></div>
           </div>
-
-          <button class="btn-primary-arrow" onclick="handleAddEmail()">
-            Send verification link
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+          <button class="btn btn-primary" onclick="handleSendOTP()">
+            Send verification code
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>
 
-        <!-- Info -->
-        <div class="helper-box" role="note">
-          <img
-            class="helper-icon"
-            src="https://www.figma.com/api/mcp/asset/85049dea-98b5-4ae9-b2a8-0ee6cd80bce5"
-            alt="Info"
-          />
-          <div class="helper-content">
-            <p class="helper-title">Why do we need this?</p>
-            <p class="helper-body">
-              Since your work email is no longer active, a personal email lets you access your Candidly data securely even after leaving your employer.
-            </p>
+        <div class="info-box neutral">
+          <img src="https://www.figma.com/api/mcp/asset/85049dea-98b5-4ae9-b2a8-0ee6cd80bce5" alt="" width="20" height="20" style="flex-shrink:0;margin-top:1px" />
+          <div class="info-box-body">
+            <p class="info-box-title neutral">Why do we need this?</p>
+            <p class="info-box-text">Since your work email is inactive, a personal email lets you access your Candidly data securely after leaving your employer.</p>
           </div>
         </div>
 
       </div><!-- /screen-add-email -->
 
-    </div>
-  </div>
+
+      <!-- ════════════════════════════════
+           SCREEN 3 — OTP Entry
+      ════════════════════════════════ -->
+      <div id="screen-otp" class="screen">
+
+        <button class="back" onclick="showScreen('add-email')">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="#265ddc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Back
+        </button>
+
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="icon-bubble blue">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+              <path d="M3 5.5h16M3 5.5c0-.828.672-1.5 1.5-1.5h13c.828 0 1.5.672 1.5 1.5M3 5.5v11c0 .828.672 1.5 1.5 1.5h13c.828 0 1.5-.672 1.5-1.5v-11M7 10l3.5 3L15 8" stroke="#265ddc" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <h2 class="h2">Check your inbox</h2>
+            <p class="sub">We sent a 6-digit code to <strong id="otp-email-display" style="color:var(--text)">your email</strong>. Enter it below — it expires in 10 minutes.</p>
+          </div>
+        </div>
+
+        <!-- OTP input -->
+        <div class="otp-group" role="group" aria-label="6-digit verification code">
+          <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="Digit 1" />
+          <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="Digit 2" />
+          <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="Digit 3" />
+          <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="Digit 4" />
+          <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="Digit 5" />
+          <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="Digit 6" />
+        </div>
+
+        <button class="btn btn-primary" onclick="handleVerifyOTP()">Verify code</button>
+
+        <!-- Resend -->
+        <div class="resend-row">
+          <span class="resend-timer" id="resend-timer">Resend code in <strong id="resend-countdown">45</strong>s</span>
+          <button class="resend-btn" id="resend-btn" disabled onclick="handleResendOTP()">Resend code</button>
+        </div>
+
+        <div style="text-align:center">
+          <button class="tlink" onclick="showScreen('add-email')">Try a different email →</button>
+        </div>
+
+      </div><!-- /screen-otp -->
+
+
+      <!-- ════════════════════════════════
+           SCREEN 4 — Wrong Code
+      ════════════════════════════════ -->
+      <div id="screen-wrong-code" class="screen">
+
+        <button class="back" onclick="showScreen('otp')">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="#265ddc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Back
+        </button>
+
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="icon-bubble red">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+              <circle cx="11" cy="11" r="8.5" stroke="#dc2626" stroke-width="1.5"/>
+              <path d="M7.5 7.5l7 7M14.5 7.5l-7 7" stroke="#dc2626" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div>
+            <h2 class="h2">That code didn't match</h2>
+            <p class="sub" id="wrong-code-sub">Check the code in your inbox and try again.</p>
+          </div>
+        </div>
+
+        <!-- Attempt bar -->
+        <div class="attempt-bar" role="alert">
+          <span class="attempt-text" id="attempt-text">Attempt 1 of 3</span>
+          <div class="attempt-dots" id="attempt-dots" aria-hidden="true">
+            <div class="attempt-dot used"></div>
+            <div class="attempt-dot open"></div>
+            <div class="attempt-dot open"></div>
+          </div>
+        </div>
+
+        <!-- OTP re-entry -->
+        <div class="otp-group" role="group" aria-label="6-digit verification code">
+          <input class="otp-box error" type="text" inputmode="numeric" maxlength="1" aria-label="Digit 1" />
+          <input class="otp-box error" type="text" inputmode="numeric" maxlength="1" aria-label="Digit 2" />
+          <input class="otp-box error" type="text" inputmode="numeric" maxlength="1" aria-label="Digit 3" />
+          <input class="otp-box error" type="text" inputmode="numeric" maxlength="1" aria-label="Digit 4" />
+          <input class="otp-box error" type="text" inputmode="numeric" maxlength="1" aria-label="Digit 5" />
+          <input class="otp-box error" type="text" inputmode="numeric" maxlength="1" aria-label="Digit 6" />
+        </div>
+
+        <button class="btn btn-primary" onclick="handleWrongCodeRetry()">Try again</button>
+
+        <!-- Escape hatches — prominent -->
+        <div style="display:flex;flex-direction:column;gap:10px;padding-top:4px;border-top:1px solid var(--border);">
+          <p style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text-3);padding-top:4px;">Not working?</p>
+          <button class="option-card secondary" style="padding:12px 16px" onclick="showScreen('add-email')">
+            <div class="option-card-icon" style="width:30px;height:30px">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h12M10 4l4 4-4 4" stroke="#676d7a" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="option-card-body">
+              <p class="option-card-title" style="font-size:14px">Try a different email</p>
+              <p class="option-card-desc">In case you mistyped your address</p>
+            </div>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="#8f95a3" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div style="text-align:center">
+            <button class="tlink" id="wrong-resend-btn" onclick="handleResendFromWrong()">Resend a new code →</button>
+          </div>
+        </div>
+
+      </div><!-- /screen-wrong-code -->
+
+
+      <!-- ════════════════════════════════
+           SCREEN 5 — Email verified (transition)
+      ════════════════════════════════ -->
+      <div id="screen-verified" class="screen">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;padding:8px 0;">
+          <div class="icon-bubble green" style="width:64px;height:64px">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <circle cx="14" cy="14" r="12" stroke="#16a34a" stroke-width="1.5"/>
+              <path d="M8.5 14l4 4 7-8" stroke="#16a34a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <h2 class="h2">Email verified</h2>
+            <p class="sub"><span id="verified-email">your email</span> is confirmed. Now create a password to secure your account.</p>
+          </div>
+          <button class="btn btn-primary" style="max-width:280px" onclick="showScreen('set-password')">
+            Set a password
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div><!-- /screen-verified -->
+
+
+      <!-- ════════════════════════════════
+           SCREEN 6 — Set password (live strength meter)
+      ════════════════════════════════ -->
+      <div id="screen-set-password" class="screen">
+
+        <button class="back" onclick="showScreen('verified')">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="#265ddc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Back
+        </button>
+
+        <div>
+          <h2 class="h2">Create a password</h2>
+          <p class="sub">This will be your password for Candidly going forward.</p>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:20px;">
+
+          <!-- New password -->
+          <div style="display:flex;flex-direction:column;gap:0;">
+            <div class="field">
+              <input type="password" id="new-password" autocomplete="new-password" aria-label="New password (required)" aria-required="true" oninput="updateStrength(this.value)" />
+              <div class="flabel"><span>New password</span><span style="color:var(--text-3)">(required)</span></div>
+            </div>
+
+            <!-- Strength meter -->
+            <div class="strength-meter" id="strength-meter" aria-live="polite">
+              <div class="strength-track">
+                <div class="strength-seg" id="seg0"></div>
+                <div class="strength-seg" id="seg1"></div>
+                <div class="strength-seg" id="seg2"></div>
+                <div class="strength-seg" id="seg3"></div>
+              </div>
+              <span class="strength-label" id="strength-label" style="color:var(--text-3)">Enter a password</span>
+              <div class="pw-reqs" id="pw-reqs">
+                <div class="pw-req" id="req-len">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M4 7l2.5 2.5L10 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  At least 8 characters
+                </div>
+                <div class="pw-req" id="req-upper">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M4 7l2.5 2.5L10 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  One uppercase letter
+                </div>
+                <div class="pw-req" id="req-num">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M4 7l2.5 2.5L10 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  One number
+                </div>
+                <div class="pw-req" id="req-special">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M4 7l2.5 2.5L10 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  One special character
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Confirm password -->
+          <div class="field">
+            <input type="password" id="confirm-password" autocomplete="new-password" aria-label="Confirm password (required)" aria-required="true" />
+            <div class="flabel"><span>Confirm password</span><span style="color:var(--text-3)">(required)</span></div>
+          </div>
+
+          <button class="btn btn-primary" onclick="handleSetPassword()">Create account</button>
+        </div>
+
+      </div><!-- /screen-set-password -->
+
+
+      <!-- ════════════════════════════════
+           SCREEN 7 — Success
+      ════════════════════════════════ -->
+      <div id="screen-success" class="screen">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center;padding:12px 0;">
+          <div class="icon-bubble green" style="width:72px;height:72px">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <circle cx="16" cy="16" r="13" stroke="#16a34a" stroke-width="1.5"/>
+              <path d="M9 16l5 5 9-10" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <h2 class="h2">You're back in</h2>
+            <p class="sub">Your Candidly account is now secured with <strong id="success-email" style="color:var(--text)">your personal email</strong>. Your data is ready.</p>
+          </div>
+          <button class="btn btn-primary" style="max-width:280px" onclick="showDashboard()">
+            Go to my account →
+          </button>
+          <p style="font-size:13px;color:var(--text-3);max-width:320px;line-height:1.5;">
+            Your employer's contributions are paused. You can re-enroll with a new employer at any time.
+          </p>
+        </div>
+      </div><!-- /screen-success -->
+
+    </div><!-- /card -->
+  </div><!-- /page -->
+
 
   <script>
-    // ── Tab switching (login screen) ──
-    function switchTab(tab) {
-      const tabs = { magic: 'tab-magic', login: 'tab-login' };
-      const panels = { magic: 'panel-magic', login: 'panel-login' };
+    /* ═══════════════ STATE ═══════════════ */
+    let state = {
+      orgEmail:      '',
+      personalEmail: '',
+      otpAttempts:   0,
+      resendTimer:   null,
+    };
+    const CORRECT_OTP = '123456'; // demo only
+    const MAX_ATTEMPTS = 3;
 
-      Object.keys(tabs).forEach(key => {
-        const tabEl = document.getElementById(tabs[key]);
-        const panelEl = document.getElementById(panels[key]);
-        const isActive = key === tab;
-
-        tabEl.classList.toggle('active', isActive);
-        tabEl.setAttribute('aria-selected', String(isActive));
-        panelEl.classList.toggle('active', isActive);
-
-        const checkIcon = tabEl.querySelector('.check-icon');
-        if (checkIcon) checkIcon.style.display = isActive ? '' : 'none';
-      });
-
-      const activeTabEl = document.getElementById(tabs[tab]);
-      if (!activeTabEl.querySelector('.check-icon')) {
-        const img = document.createElement('img');
-        img.className = 'check-icon';
-        img.src = 'https://www.figma.com/api/mcp/asset/550ba3f9-7e8e-4fb9-8691-dd3f7927ca87';
-        img.alt = '';
-        activeTabEl.prepend(img);
-      }
-    }
-
-    // ── Screen navigation ──
-    const SCREENS = ['login', 'recovery', 'add-email'];
+    /* ═══════════════ SCREEN ROUTING ═══════════════ */
+    const ALL_SCREENS = ['login','terminated','add-email','otp','wrong-code','verified','set-password','success'];
 
     function showScreen(name) {
-      SCREENS.forEach(s => {
+      ALL_SCREENS.forEach(s => {
         const el = document.getElementById('screen-' + s);
         if (el) el.classList.toggle('active', s === name);
       });
-      // Scroll card into view smoothly
-      document.querySelector('.card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // ── Login submit: detect terminated org email ──
+    function showDashboard() {
+      document.getElementById('dashboard-page').classList.add('active');
+      window.scrollTo({ top: 0 });
+    }
+
+    /* ═══════════════ TAB SWITCH (screen 1) ═══════════════ */
+    function switchTab(tab) {
+      ['magic','login'].forEach(key => {
+        const tabEl   = document.getElementById('tab-' + key);
+        const panelEl = document.getElementById('panel-' + key);
+        const active  = key === tab;
+        tabEl.classList.toggle('active', active);
+        tabEl.setAttribute('aria-selected', String(active));
+        panelEl.style.display = active ? 'flex' : 'none';
+        const check = tabEl.querySelector('.check-icon');
+        if (check) check.style.display = active ? '' : 'none';
+      });
+      const activeTab = document.getElementById('tab-' + tab);
+      if (!activeTab.querySelector('.check-icon')) {
+        const img = document.createElement('img');
+        img.className = 'check-icon'; img.alt = '';
+        img.src = 'https://www.figma.com/api/mcp/asset/550ba3f9-7e8e-4fb9-8691-dd3f7927ca87';
+        img.style.width = '20px'; img.style.height = '20px';
+        activeTab.prepend(img);
+      }
+    }
+
+    /* ═══════════════ LOGIN HANDLER ═══════════════ */
     const PERSONAL_DOMAINS = new Set([
       'gmail.com','yahoo.com','hotmail.com','outlook.com',
       'icloud.com','me.com','live.com','aol.com','protonmail.com','hey.com'
     ]);
 
-    function isOrgEmail(value) {
-      const parts = value.trim().toLowerCase().split('@');
-      if (parts.length !== 2) return false;
-      return !PERSONAL_DOMAINS.has(parts[1]);
+    function isOrgEmail(v) {
+      const parts = v.trim().toLowerCase().split('@');
+      return parts.length === 2 && !PERSONAL_DOMAINS.has(parts[1]);
     }
 
     function handleLogin() {
-      const emailInput = document.getElementById('email-username');
-      const email = emailInput.value.trim();
-
-      if (!email) {
-        emailInput.focus();
-        return;
-      }
-
+      const email = document.getElementById('email-username').value.trim();
+      if (!email) { document.getElementById('email-username').focus(); return; }
       if (isOrgEmail(email)) {
-        // Show terminated-account recovery screen with their email
+        state.orgEmail = email;
         document.getElementById('terminated-email').textContent = email;
-        showScreen('recovery');
+        document.getElementById('terminated-desc').textContent =
+          email + ' is no longer active. Here\'s what that means for your account.';
+        showScreen('terminated');
       }
-      // Personal emails would proceed to normal login (not implemented in prototype)
     }
 
-    // ── Add personal email submit ──
-    function handleAddEmail() {
-      const input = document.getElementById('personal-email');
-      const email = input.value.trim();
-      if (!email || !email.includes('@')) { input.focus(); return; }
-      // In production this would POST to the API
-      alert('Verification link sent to ' + email + '.\nCheck your inbox to complete recovery.');
+    /* ═══════════════ SEND OTP ═══════════════ */
+    function handleSendOTP() {
+      const email = document.getElementById('personal-email').value.trim();
+      if (!email || !email.includes('@')) {
+        document.getElementById('personal-email').focus(); return;
+      }
+      state.personalEmail = email;
+      state.otpAttempts   = 0;
+      document.getElementById('otp-email-display').textContent = email;
+      showScreen('otp');
+      clearOTPBoxes('#screen-otp .otp-box');
+      startResendTimer();
+      // Auto-focus first box
+      document.querySelector('#screen-otp .otp-box').focus();
+    }
+
+    /* ═══════════════ VERIFY OTP ═══════════════ */
+    function handleVerifyOTP() {
+      const boxes = document.querySelectorAll('#screen-otp .otp-box');
+      const code  = [...boxes].map(b => b.value).join('');
+      if (code.length < 6) { boxes[0].focus(); return; }
+
+      if (code === CORRECT_OTP) {
+        document.getElementById('verified-email').textContent = state.personalEmail;
+        document.getElementById('success-email').textContent  = state.personalEmail;
+        showScreen('verified');
+      } else {
+        state.otpAttempts++;
+        showWrongCode();
+      }
+    }
+
+    function showWrongCode() {
+      // populate attempt UI
+      const remaining = MAX_ATTEMPTS - state.otpAttempts;
+      document.getElementById('attempt-text').textContent =
+        `Attempt ${state.otpAttempts} of ${MAX_ATTEMPTS}`;
+
+      const dots = document.getElementById('attempt-dots');
+      dots.innerHTML = '';
+      for (let i = 0; i < MAX_ATTEMPTS; i++) {
+        const d = document.createElement('div');
+        d.className = 'attempt-dot ' + (i < state.otpAttempts ? 'used' : 'open');
+        dots.appendChild(d);
+      }
+
+      if (remaining <= 0) {
+        document.getElementById('wrong-code-sub').textContent =
+          'No attempts remaining. Request a new code or try a different email.';
+      } else {
+        document.getElementById('wrong-code-sub').textContent =
+          `${remaining} attempt${remaining !== 1 ? 's' : ''} remaining before this code expires.`;
+      }
+
+      clearOTPBoxes('#screen-wrong-code .otp-box');
+      showScreen('wrong-code');
+      document.querySelector('#screen-wrong-code .otp-box').focus();
+    }
+
+    function handleWrongCodeRetry() {
+      if (state.otpAttempts >= MAX_ATTEMPTS) {
+        alert('No attempts remaining. Please request a new code.');
+        return;
+      }
+      const boxes = document.querySelectorAll('#screen-wrong-code .otp-box');
+      const code  = [...boxes].map(b => b.value).join('');
+      if (code.length < 6) { boxes[0].focus(); return; }
+
+      if (code === CORRECT_OTP) {
+        document.getElementById('verified-email').textContent = state.personalEmail;
+        document.getElementById('success-email').textContent  = state.personalEmail;
+        showScreen('verified');
+      } else {
+        state.otpAttempts++;
+        showWrongCode();
+      }
+    }
+
+    function handleResendFromWrong() {
+      state.otpAttempts = 0;
+      showScreen('otp');
+      clearOTPBoxes('#screen-otp .otp-box');
+      startResendTimer();
+      document.querySelector('#screen-otp .otp-box').focus();
+    }
+
+    function handleResendOTP() {
+      state.otpAttempts = 0;
+      clearOTPBoxes('#screen-otp .otp-box');
+      startResendTimer();
+      document.querySelector('#screen-otp .otp-box').focus();
+      alert('New code sent to ' + state.personalEmail);
+    }
+
+    /* ═══════════════ RESEND COUNTDOWN ═══════════════ */
+    function startResendTimer() {
+      const btn      = document.getElementById('resend-btn');
+      const timerEl  = document.getElementById('resend-timer');
+      const countdown = document.getElementById('resend-countdown');
+      btn.disabled = true;
+      timerEl.style.display = 'inline';
+      btn.style.display = 'none';
+
+      let secs = 45;
+      countdown.textContent = secs;
+      clearInterval(state.resendTimer);
+      state.resendTimer = setInterval(() => {
+        secs--;
+        countdown.textContent = secs;
+        if (secs <= 0) {
+          clearInterval(state.resendTimer);
+          timerEl.style.display = 'none';
+          btn.style.display = 'inline';
+          btn.disabled = false;
+        }
+      }, 1000);
+    }
+
+    /* ═══════════════ OTP BOX BEHAVIOUR ═══════════════ */
+    function initOTPGroup(selector) {
+      const boxes = document.querySelectorAll(selector);
+      boxes.forEach((box, i) => {
+        box.addEventListener('input', e => {
+          const val = e.target.value.replace(/\D/g, '');
+          box.value = val.slice(-1);
+          box.classList.toggle('filled', box.value !== '');
+          box.classList.remove('error');
+          if (val && i < boxes.length - 1) boxes[i + 1].focus();
+        });
+        box.addEventListener('keydown', e => {
+          if (e.key === 'Backspace' && !box.value && i > 0) boxes[i - 1].focus();
+        });
+        box.addEventListener('paste', e => {
+          e.preventDefault();
+          const text = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g,'');
+          [...text.slice(0, 6)].forEach((ch, j) => {
+            if (boxes[i + j]) { boxes[i + j].value = ch; boxes[i + j].classList.add('filled'); }
+          });
+          const next = boxes[Math.min(i + text.length, boxes.length - 1)];
+          if (next) next.focus();
+        });
+      });
+    }
+
+    initOTPGroup('#screen-otp .otp-box');
+    initOTPGroup('#screen-wrong-code .otp-box');
+
+    function clearOTPBoxes(selector) {
+      document.querySelectorAll(selector).forEach(b => {
+        b.value = ''; b.classList.remove('filled','error');
+      });
+    }
+
+    /* ═══════════════ PASSWORD STRENGTH ═══════════════ */
+    const STRENGTH_LABELS = ['Weak','Fair','Strong','Very strong'];
+    const STRENGTH_CLASSES = ['s0','s1','s2','s3'];
+
+    function updateStrength(val) {
+      const checks = {
+        len:     val.length >= 8,
+        upper:   /[A-Z]/.test(val),
+        num:     /[0-9]/.test(val),
+        special: /[^A-Za-z0-9]/.test(val),
+      };
+      const score = Object.values(checks).filter(Boolean).length; // 0-4
+      const level = val.length === 0 ? -1 : Math.min(score - 1, 3); // -1 to 3
+
+      // Update segments
+      for (let i = 0; i < 4; i++) {
+        const seg = document.getElementById('seg' + i);
+        seg.className = 'strength-seg';
+        if (level >= 0 && i <= level) seg.classList.add('active', STRENGTH_CLASSES[level]);
+      }
+
+      // Update label
+      const lbl = document.getElementById('strength-label');
+      lbl.className = 'strength-label';
+      if (level >= 0) { lbl.classList.add(STRENGTH_CLASSES[level]); lbl.textContent = STRENGTH_LABELS[level]; }
+      else            { lbl.textContent = 'Enter a password'; lbl.style.color = 'var(--text-3)'; }
+
+      // Update requirements
+      Object.entries(checks).forEach(([key, met]) => {
+        const el = document.getElementById('req-' + (key === 'len' ? 'len' : key === 'upper' ? 'upper' : key === 'num' ? 'num' : 'special'));
+        if (el) el.classList.toggle('met', met);
+      });
+    }
+
+    /* ═══════════════ SET PASSWORD HANDLER ═══════════════ */
+    function handleSetPassword() {
+      const pw  = document.getElementById('new-password').value;
+      const cpw = document.getElementById('confirm-password').value;
+      if (!pw || pw.length < 8) { document.getElementById('new-password').focus(); return; }
+      if (pw !== cpw) {
+        document.getElementById('confirm-password').classList.add('error');
+        document.getElementById('confirm-password').focus();
+        return;
+      }
+      showScreen('success');
     }
   </script>
 
