@@ -151,13 +151,14 @@
 
     /* ── Text link ── */
     .tlink { color: var(--brand); font-size: 14px; font-weight: 500; text-decoration: none; cursor: pointer; background: none; border: none; padding: 0; }
+    .tlink:hover { text-decoration: underline; }
 
-    /* ── Recovery option cards (Figma design) ── */
+    /* ── Recovery option cards ── */
     .recovery-card {
       background: var(--surface);
       border: 1px solid #f0f2f5;
       border-radius: var(--r-lg);
-      padding: 24px;
+      padding: 20px;
       width: 100%;
       text-align: left;
       cursor: pointer;
@@ -166,11 +167,9 @@
       gap: 4px;
       transition: border-color .15s, background .15s;
     }
-    .recovery-card:hover { border-color: var(--brand); }
-    .recovery-card.selected { border-color: var(--brand); background: var(--brand-bg); }
-    .recovery-card-title { font-size: 20px; font-weight: 700; line-height: 24px; color: var(--text); margin: 0; }
-    .recovery-card-desc  { font-size: 14px; font-weight: 400; line-height: 1.5; color: #2a2f3d; margin: 0; }
-    .tlink:hover { text-decoration: underline; }
+    .recovery-card:hover { border-color: var(--brand); background: var(--brand-bg); }
+    .recovery-card-title { font-size: 16px; font-weight: 700; line-height: 1.3; color: var(--text); margin: 0; }
+    .recovery-card-desc  { font-size: 14px; font-weight: 400; line-height: 1.5; color: var(--text-2); margin: 0; }
 
     /* ── Toggle tabs ── */
     .toggle-group { display:flex; border:1px solid var(--border); border-radius:var(--r-md); overflow:hidden; }
@@ -227,10 +226,20 @@
     .info-box-text  { font-size:14px; font-weight:400; line-height:1.5; color:var(--text-2); }
     .info-box-text a { color:var(--brand); text-decoration:underline; }
 
-    /* ══════════════════════════════════════════
-       SCREEN 1 — TERMINATED HARD BLOCK
-    ══════════════════════════════════════════ */
+    /* ── Dashboard ── */
+    .dash-header {
+      display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+    }
+    .dash-status-pill {
+      display:inline-flex; align-items:center; gap:6px;
+      padding:4px 12px; border-radius:var(--r-full);
+      font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.05em;
+      white-space:nowrap; flex-shrink:0;
+    }
+    .dash-status-pill.active     { background:var(--green-bg); color:var(--green); border:1px solid var(--green-border); }
+    .dash-status-pill.terminated { background:var(--amber-bg); color:var(--amber-dark); border:1px solid var(--amber-border); }
 
+    /* ── Badge ── */
     .badge {
       display:inline-flex; align-items:center; gap:5px;
       padding:3px 10px; border-radius:var(--r-sm);
@@ -239,6 +248,7 @@
     }
     .badge.amber { background:#fef3c7; border:1px solid #fcd34d; color:var(--amber-dark); }
 
+    /* ── Data status grid ── */
     .data-status-grid {
       display:grid; grid-template-columns:1fr 1fr; gap:10px;
     }
@@ -257,17 +267,15 @@
     .data-status-items { display:flex; flex-direction:column; gap:4px; }
     .data-status-item { font-size:13px; color:var(--text-2); line-height:1.4; }
 
+    /* ── Option cards ── */
     .options-stack { display:flex; flex-direction:column; gap:10px; }
-
     .option-card {
       width:100%; display:flex; align-items:center; gap:12px;
       border-radius:var(--r-md); padding:14px 16px;
       border:none; cursor:pointer; font-family:var(--font); text-align:left;
       transition:opacity .15s, box-shadow .15s;
     }
-    .option-card.primary {
-      background:var(--brand); color:#fff;
-    }
+    .option-card.primary { background:var(--brand); color:#fff; }
     .option-card.primary:hover { background:var(--brand-hover); }
     .option-card.secondary {
       background:var(--bg); color:var(--text);
@@ -286,17 +294,8 @@
     .option-card.primary .option-card-desc { opacity:.8; }
     .option-card.secondary .option-card-desc { color:var(--text-3); }
 
-    .tertiary-row {
-      display:flex; justify-content:center; padding-top:4px;
-    }
-
-    /* ══════════════════════════════════════════
-       SCREEN 3 — OTP
-    ══════════════════════════════════════════ */
-
-    .otp-group {
-      display:flex; gap:10px; justify-content:center;
-    }
+    /* ── OTP ── */
+    .otp-group { display:flex; gap:10px; justify-content:center; }
     .otp-box {
       width:52px; height:60px;
       border:1.5px solid var(--border-2); border-radius:var(--r-md);
@@ -315,7 +314,7 @@
     .resend-btn:disabled { color:var(--text-3); cursor:default; }
     .resend-btn:not(:disabled):hover { text-decoration:underline; }
 
-    /* attempt bar */
+    /* ── Attempt bar ── */
     .attempt-bar {
       display:flex; align-items:center; justify-content:space-between;
       padding:10px 12px; border-radius:var(--r-md);
@@ -323,20 +322,13 @@
     }
     .attempt-text { font-size:13px; font-weight:500; color:var(--red); }
     .attempt-dots { display:flex; gap:5px; }
-    .attempt-dot {
-      width:8px; height:8px; border-radius:50%;
-    }
+    .attempt-dot  { width:8px; height:8px; border-radius:50%; }
     .attempt-dot.used { background:var(--red); }
     .attempt-dot.open { background:var(--red-border); }
 
-    /* ══════════════════════════════════════════
-       SCREEN 6 — PASSWORD STRENGTH
-    ══════════════════════════════════════════ */
-
+    /* ── Password strength ── */
     .strength-meter { display:flex; flex-direction:column; gap:8px; margin-top:8px; }
-    .strength-track {
-      display:flex; gap:4px; height:4px;
-    }
+    .strength-track { display:flex; gap:4px; height:4px; }
     .strength-seg {
       flex:1; border-radius:2px; background:var(--border);
       transition:background .25s;
@@ -345,24 +337,25 @@
     .strength-seg.active.s1 { background:#f97316; }
     .strength-seg.active.s2 { background:#eab308; }
     .strength-seg.active.s3 { background:#16a34a; }
-    .strength-label {
-      font-size:12px; font-weight:600;
-      transition:color .25s;
-    }
+    .strength-label { font-size:12px; font-weight:600; transition:color .25s; }
     .strength-label.s0 { color:#dc2626; }
     .strength-label.s1 { color:#f97316; }
     .strength-label.s2 { color:#eab308; }
     .strength-label.s3 { color:#16a34a; }
-
     .pw-reqs { display:flex; flex-direction:column; gap:5px; margin-top:4px; }
     .pw-req { display:flex; align-items:center; gap:7px; font-size:13px; color:var(--text-3); }
     .pw-req.met { color:var(--green); }
     .pw-req svg { flex-shrink:0; }
 
-    /* ══════════════════════════════════════════
-       SCREEN 8 — DASHBOARD
-    ══════════════════════════════════════════ */
-
+    /* ── Demo simulation strip ── */
+    .demo-strip {
+      display:flex; flex-direction:column; gap:8px;
+      border-top:1px dashed var(--border); padding-top:20px; margin-top:4px;
+    }
+    .demo-strip-label {
+      font-size:11px; font-weight:700; text-transform:uppercase;
+      letter-spacing:.06em; color:var(--text-3); text-align:center;
+    }
 
     /* ── Responsive ── */
     @media (max-width:520px) {
@@ -372,7 +365,6 @@
       .logo-bar { margin-bottom:32px; }
       .otp-box { width:44px; height:54px; font-size:20px; }
       .data-status-grid { grid-template-columns:1fr; }
-      .dash-body { padding:20px 16px 60px; }
     }
   </style>
 </head>
@@ -387,9 +379,6 @@
     <div class="shape s5"></div>
   </div>
 
-  <!-- ══════════════════════════════════════════════════════
-       MAIN PAGE — card-based screens 1–7
-  ══════════════════════════════════════════════════════ -->
   <div class="page">
 
     <!-- Logo -->
@@ -403,7 +392,7 @@
     <div class="card">
 
       <!-- ════════════════════════════════
-           SCREEN 1 — Login
+           SCREEN — Login
       ════════════════════════════════ -->
       <div id="screen-login" class="screen active">
 
@@ -445,7 +434,7 @@
           </div>
           <button class="btn btn-primary" onclick="handleLogin()">Log in</button>
           <div style="text-align:center">
-            <button class="tlink" style="font-size:16px" onclick="void(0)">Forgot your password?</button>
+            <button class="tlink" style="font-size:16px" onclick="showScreen('recovery-password')">Forgot your password?</button>
           </div>
         </div>
 
@@ -458,107 +447,385 @@
           <button class="btn btn-primary">Send magic link</button>
         </div>
 
-        <div class="info-box neutral">
-          <img src="https://www.figma.com/api/mcp/asset/85049dea-98b5-4ae9-b2a8-0ee6cd80bce5" alt="" width="20" height="20" style="flex-shrink:0;margin-top:1px" />
-          <div class="info-box-body">
-            <p class="info-box-title neutral">Trouble logging in?</p>
-            <p class="info-box-text">If your employer provided access, reach out to us at <a href="mailto:help@getcandidly.com">help@getcandidly.com</a> and we'll help you get set up.</p>
-          </div>
+        <div style="text-align:center;padding-top:4px;">
+          <button class="tlink" onclick="showScreen('recovery')">Trouble signing in?</button>
         </div>
 
       </div><!-- /screen-login -->
 
 
       <!-- ════════════════════════════════
-           SCREEN 1b — Terminated + Inbox Check (combined)
+           SCREEN — Dashboard
       ════════════════════════════════ -->
-      <div id="screen-terminated" class="screen">
+      <div id="screen-dashboard" class="screen">
 
-        <button class="back" onclick="showScreen('login')">Back to login</button>
-
-        <div style="display:flex;flex-direction:column;gap:16px;">
-          <div style="display:flex;flex-direction:column;gap:4px;">
-            <h2 class="h1">Your account access needs to be restored</h2>
-            <p class="sub">Your organization account is no longer active, so your work credentials can't be used. You can still access Candidly—we just need to verify your identity to restore your account.</p>
+        <!-- Active user state -->
+        <div id="dash-active" style="display:none;flex-direction:column;gap:24px;">
+          <div class="dash-header">
+            <div>
+              <h1 class="h1">Welcome back</h1>
+              <p class="sub">Your Candidly account is fully active.</p>
+            </div>
+            <span class="dash-status-pill active">Active</span>
           </div>
-          <p style="font-size:16px;font-weight:700;line-height:1.5;color:var(--text);margin:0;">Do you still have access to your work inbox at <span id="inbox-email-display" style="color:var(--text)">your work email</span>?</p>
+          <div class="info-box green">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style="flex-shrink:0;margin-top:1px"><circle cx="9" cy="9" r="7.5" stroke="#16a34a" stroke-width="1.4"/><path d="M5.5 9l2.5 2.5L12.5 6" stroke="#16a34a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div class="info-box-body">
+              <p class="info-box-title green">Account in good standing</p>
+              <p class="info-box-text">Your retirement contributions and data are up to date.</p>
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="alert('Navigating to your Candidly dashboard…')">Go to my dashboard →</button>
+          <div style="text-align:center">
+            <button class="tlink" onclick="showScreen('login')">Log out</button>
+          </div>
         </div>
 
-        <!-- Yes card -->
-        <button class="recovery-card" id="card-yes" onclick="selectRecoveryOption('yes')">
-          <p class="recovery-card-title">Yes — send a recovery link</p>
-          <p class="recovery-card-desc">We'll email a secure link to your work inbox so you can quickly restore access.</p>
-        </button>
+        <!-- Terminated user state -->
+        <div id="dash-terminated" style="display:none;flex-direction:column;gap:20px;">
+          <div class="dash-header">
+            <div>
+              <h1 class="h1">You're in — read-only</h1>
+              <p class="sub">Your employer account is no longer active. Your data is safe.</p>
+            </div>
+            <span class="dash-status-pill terminated">Read-only</span>
+          </div>
+          <div class="data-status-grid">
+            <div class="data-status-card kept">
+              <p class="data-status-label kept">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7l3 3L11 4" stroke="#16a34a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Kept
+              </p>
+              <div class="data-status-items">
+                <p class="data-status-item">Retirement balance</p>
+                <p class="data-status-item">Contribution history</p>
+                <p class="data-status-item">Beneficiary info</p>
+              </div>
+            </div>
+            <div class="data-status-card paused">
+              <p class="data-status-label paused">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3v8M9 3v8" stroke="#d97706" stroke-width="1.4" stroke-linecap="round"/></svg>
+                Paused
+              </p>
+              <div class="data-status-items">
+                <p class="data-status-item">New contributions</p>
+                <p class="data-status-item">Employer matching</p>
+              </div>
+            </div>
+          </div>
+          <!-- Nudge: add personal email (shown if no personal email on file) -->
+          <div class="info-box amber">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M9 1.5L1.5 15.5h15L9 1.5z" stroke="#d97706" stroke-width="1.4" stroke-linejoin="round" fill="none"/><path d="M9 7v3.5M9 12.5h.01" stroke="#d97706" stroke-width="1.4" stroke-linecap="round"/></svg>
+            <div class="info-box-body">
+              <p class="info-box-title amber">Add a personal email now</p>
+              <p class="info-box-text">Work inboxes close. Adding a personal email ensures you can always recover your account. <button class="tlink" onclick="showScreen('add-email')" style="font-size:14px;">Add it →</button></p>
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="alert('Navigating to your Candidly account…')">View my account →</button>
+          <div style="text-align:center">
+            <button class="tlink" onclick="showScreen('login')">Log out</button>
+          </div>
+        </div>
 
-        <!-- No card -->
-        <button class="recovery-card" id="card-no" onclick="selectRecoveryOption('no')">
-          <p class="recovery-card-title">Unable to access your work email</p>
-          <p class="recovery-card-desc">Verify your identity using a few personal details to restore access.</p>
-        </button>
-
-        <button class="btn btn-primary" onclick="handleTerminatedContinue()">Continue</button>
-
-      </div><!-- /screen-terminated -->
+      </div><!-- /screen-dashboard -->
 
 
       <!-- ════════════════════════════════
-           SCREEN 1c — Verify Identity
+           SCREEN — Recovery hub
       ════════════════════════════════ -->
-      <div id="screen-verify-identity" class="screen">
+      <div id="screen-recovery" class="screen">
 
-        <button class="back" onclick="showScreen('terminated')">
+        <button class="back" onclick="showScreen('login')">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="#265ddc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Back to login
+        </button>
+
+        <div>
+          <h2 class="h2">Trouble signing in?</h2>
+          <p class="sub">Choose what best describes your situation and we'll get you sorted.</p>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <button class="recovery-card" onclick="showScreen('recovery-password')">
+            <p class="recovery-card-title">I forgot my password</p>
+            <p class="recovery-card-desc">We'll send a reset link to your email address.</p>
+          </button>
+          <button class="recovery-card" onclick="showScreen('recovery-username')">
+            <p class="recovery-card-title">I forgot my username</p>
+            <p class="recovery-card-desc">We'll remind you which username is on your account.</p>
+          </button>
+          <button class="recovery-card" onclick="showScreen('recovery-find')">
+            <p class="recovery-card-title">I don't know which email I used</p>
+            <p class="recovery-card-desc">Tell us your name and former employer and we'll locate your account.</p>
+          </button>
+          <button class="recovery-card" onclick="showScreen('recovery-find')">
+            <p class="recovery-card-title">Something else</p>
+            <p class="recovery-card-desc">Contact our support team for help with anything else.</p>
+          </button>
+        </div>
+
+      </div><!-- /screen-recovery -->
+
+
+      <!-- ════════════════════════════════
+           SCREEN — Recovery: forgot password
+      ════════════════════════════════ -->
+      <div id="screen-recovery-password" class="screen">
+
+        <button class="back" onclick="showScreen('recovery')">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="#265ddc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           Back
         </button>
 
+        <div>
+          <h2 class="h2">Reset your password</h2>
+          <p class="sub">Enter the email address or username on your account. We'll send you a reset link right away.</p>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div class="field">
+            <input type="text" id="rp-identifier" autocomplete="email" aria-label="Email or username (required)" aria-required="true" />
+            <div class="flabel"><span>Email or username</span><span style="color:var(--text-3)">(required)</span></div>
+          </div>
+
+          <div id="rp-error" style="display:none;" class="info-box red">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style="flex-shrink:0;margin-top:1px"><circle cx="9" cy="9" r="7.5" stroke="#dc2626" stroke-width="1.4"/><path d="M9 5.5v4M9 11.5h.01" stroke="#dc2626" stroke-width="1.4" stroke-linecap="round"/></svg>
+            <div class="info-box-body">
+              <p class="info-box-title red">Account not found</p>
+              <p class="info-box-text">We couldn't find an account matching that. Double-check and try again, or <button class="tlink" onclick="showScreen('recovery-find')" style="font-size:14px;">contact support</button>.</p>
+            </div>
+          </div>
+
+          <button class="btn btn-primary" onclick="handleRecoveryPassword()">Send reset link</button>
+        </div>
+
+      </div><!-- /screen-recovery-password -->
+
+
+      <!-- ════════════════════════════════
+           SCREEN — Recovery: forgot username
+      ════════════════════════════════ -->
+      <div id="screen-recovery-username" class="screen">
+
+        <button class="back" onclick="showScreen('recovery')">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="#265ddc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Back
+        </button>
+
+        <div>
+          <h2 class="h2">Find your username</h2>
+          <p class="sub">Enter any email address on your account and we'll send you your username.</p>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div class="field">
+            <input type="email" id="ru-email" autocomplete="email" aria-label="Email address (required)" aria-required="true" />
+            <div class="flabel"><span>Email address</span><span style="color:var(--text-3)">(required)</span></div>
+          </div>
+
+          <div id="ru-error" style="display:none;" class="info-box red">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style="flex-shrink:0;margin-top:1px"><circle cx="9" cy="9" r="7.5" stroke="#dc2626" stroke-width="1.4"/><path d="M9 5.5v4M9 11.5h.01" stroke="#dc2626" stroke-width="1.4" stroke-linecap="round"/></svg>
+            <div class="info-box-body">
+              <p class="info-box-title red">Email not found</p>
+              <p class="info-box-text">We couldn't find an account with that email. Try a different address or <button class="tlink" onclick="showScreen('recovery-find')" style="font-size:14px;">contact support</button>.</p>
+            </div>
+          </div>
+
+          <button class="btn btn-primary" onclick="handleRecoveryUsername()">Send username reminder</button>
+        </div>
+
+      </div><!-- /screen-recovery-username -->
+
+
+      <!-- ════════════════════════════════
+           SCREEN — Recovery: link sent
+      ════════════════════════════════ -->
+      <div id="screen-recovery-link-sent" class="screen">
+
+        <div style="display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;padding:8px 0;">
+
+          <div class="icon-bubble blue" style="width:64px;height:64px;">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <path d="M2 5h24a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z" stroke="#265ddc" stroke-width="1.6" fill="none"/>
+              <path d="M1 6l13 9.5L27 6" stroke="#265ddc" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <div>
+            <h2 class="h2">Check your inbox</h2>
+            <p class="sub">We sent a one-time link to <strong id="link-sent-email" style="color:var(--text)">your email</strong>. Click it to continue — it expires in 15 minutes.</p>
+          </div>
+
+          <div class="resend-row" style="width:100%;">
+            <span class="resend-timer" id="ls-resend-timer">Resend in <strong id="ls-resend-countdown">45</strong>s</span>
+            <button class="resend-btn" id="ls-resend-btn" disabled onclick="handleLinkSentResend()">Resend link</button>
+          </div>
+
+          <button class="tlink" onclick="handleTryDifferentEmail()">Try a different email →</button>
+
+        </div>
+
+        <!-- Demo simulation controls -->
+        <div class="demo-strip">
+          <p class="demo-strip-label">Demo — simulate email outcome</p>
+          <button class="btn btn-outline" onclick="showScreen('recovery-new-password')">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2.5 8l4 4L13.5 4" stroke="#265ddc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Link delivered → set new password
+          </button>
+          <button class="btn btn-ghost" style="width:100%;border:1px dashed var(--border);" onclick="showScreen('recovery-undeliverable')">
+            Link bounced → inbox closed
+          </button>
+        </div>
+
+      </div><!-- /screen-recovery-link-sent -->
+
+
+      <!-- ════════════════════════════════
+           SCREEN — Recovery: set new password
+      ════════════════════════════════ -->
+      <div id="screen-recovery-new-password" class="screen">
+
+        <div>
+          <h2 class="h2">Create a new password</h2>
+          <p class="sub">This will replace your current Candidly password.</p>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:20px;">
+
+          <div style="display:flex;flex-direction:column;gap:0;">
+            <div class="field">
+              <input type="password" id="rnp-password" autocomplete="new-password" aria-label="New password (required)" aria-required="true" oninput="updateStrengthFor(this.value,'rnp')" />
+              <div class="flabel"><span>New password</span><span style="color:var(--text-3)">(required)</span></div>
+            </div>
+            <div class="strength-meter" aria-live="polite">
+              <div class="strength-track">
+                <div class="strength-seg" id="rnp-seg0"></div>
+                <div class="strength-seg" id="rnp-seg1"></div>
+                <div class="strength-seg" id="rnp-seg2"></div>
+                <div class="strength-seg" id="rnp-seg3"></div>
+              </div>
+              <span class="strength-label" id="rnp-strength-label" style="color:var(--text-3)">Enter a password</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <input type="password" id="rnp-confirm" autocomplete="new-password" aria-label="Confirm password (required)" aria-required="true" />
+            <div class="flabel"><span>Confirm password</span><span style="color:var(--text-3)">(required)</span></div>
+          </div>
+
+          <div id="rnp-error" style="display:none;color:var(--red);font-size:14px;font-weight:500;">Passwords don't match. Please try again.</div>
+
+          <button class="btn btn-primary" onclick="handleRecoveryNewPassword()">Save new password</button>
+        </div>
+
+      </div><!-- /screen-recovery-new-password -->
+
+
+      <!-- ════════════════════════════════
+           SCREEN — Recovery: undeliverable
+      ════════════════════════════════ -->
+      <div id="screen-recovery-undeliverable" class="screen">
+
         <div style="display:flex;flex-direction:column;gap:12px;">
-          <div class="icon-bubble blue">
+          <div class="icon-bubble amber">
             <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-              <path d="M11 3a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 10c4.42 0 8 1.79 8 4v1H3v-1c0-2.21 3.58-4 8-4z" fill="#265ddc"/>
+              <path d="M11 2L1.5 19.5h19L11 2z" stroke="#d97706" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+              <path d="M11 9v4M11 15.5h.01" stroke="#d97706" stroke-width="1.5" stroke-linecap="round"/>
             </svg>
           </div>
           <div>
-            <h2 class="h2">Verify your identity</h2>
-            <p class="sub">Enter a few personal details so we can confirm it's you and restore your access.</p>
+            <h2 class="h2">Your work inbox may have closed</h2>
+            <p class="sub">The reset link couldn't be delivered. Work inboxes typically close 30–90 days after you leave an employer. Here are your options:</p>
           </div>
+        </div>
+
+        <div class="options-stack">
+          <button class="option-card primary" onclick="showScreen('add-email')">
+            <div class="option-card-icon">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <path d="M1 3h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" stroke="#fff" stroke-width="1.4" fill="none"/>
+                <path d="M0 4l9 6.5L18 4" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="option-card-body">
+              <p class="option-card-title">Add a personal email</p>
+              <p class="option-card-desc">Verify a personal email to use going forward</p>
+            </div>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M5 3l6 5-6 5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="option-card secondary" onclick="showScreen('recovery-find')">
+            <div class="option-card-icon">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <circle cx="9" cy="6" r="3.5" stroke="#676d7a" stroke-width="1.4"/>
+                <path d="M1.5 17c0-3 3.36-5 7.5-5s7.5 2 7.5 5" stroke="#676d7a" stroke-width="1.4" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="option-card-body">
+              <p class="option-card-title">Verify with personal details</p>
+              <p class="option-card-desc">Our team will match your name and employer details</p>
+            </div>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M5 3l6 5-6 5" stroke="#8f95a3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="option-card secondary" onclick="window.location='mailto:help@getcandidly.com'">
+            <div class="option-card-icon">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <circle cx="9" cy="9" r="7.5" stroke="#676d7a" stroke-width="1.4"/>
+                <path d="M9 5.5v4M9 11.5h.01" stroke="#676d7a" stroke-width="1.4" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="option-card-body">
+              <p class="option-card-title">Contact support</p>
+              <p class="option-card-desc">Email help@getcandidly.com — we'll get you sorted</p>
+            </div>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M5 3l6 5-6 5" stroke="#8f95a3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+
+      </div><!-- /screen-recovery-undeliverable -->
+
+
+      <!-- ════════════════════════════════
+           SCREEN — Recovery: find my account
+      ════════════════════════════════ -->
+      <div id="screen-recovery-find" class="screen">
+
+        <button class="back" onclick="showScreen('recovery')">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="#265ddc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Back
+        </button>
+
+        <div>
+          <h2 class="h2">Let's find your account</h2>
+          <p class="sub">Fill in a few details and our team will locate your account and follow up within 1–2 business days.</p>
         </div>
 
         <div style="display:flex;flex-direction:column;gap:16px;">
 
-          <!-- Name row -->
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
             <div class="field">
-              <input type="text" id="vi-first-name" autocomplete="given-name" aria-label="First legal name (required)" aria-required="true" />
-              <div class="flabel"><span>First legal name</span><span style="color:var(--text-3)">(required)</span></div>
+              <input type="text" id="rf-first" autocomplete="given-name" aria-label="First name (required)" aria-required="true" />
+              <div class="flabel"><span>First name</span><span style="color:var(--text-3)">(required)</span></div>
             </div>
             <div class="field">
-              <input type="text" id="vi-last-name" autocomplete="family-name" aria-label="Last legal name (required)" aria-required="true" />
-              <div class="flabel"><span>Last legal name</span><span style="color:var(--text-3)">(required)</span></div>
+              <input type="text" id="rf-last" autocomplete="family-name" aria-label="Last name (required)" aria-required="true" />
+              <div class="flabel"><span>Last name</span><span style="color:var(--text-3)">(required)</span></div>
             </div>
           </div>
 
-          <!-- Birthday -->
           <div class="field">
-            <input type="date" id="vi-birthday" autocomplete="bday" aria-label="Date of birth (required)" aria-required="true" />
-            <div class="flabel"><span>Date of birth</span><span style="color:var(--text-3)">(required)</span></div>
+            <input type="text" id="rf-employer" autocomplete="organization" aria-label="Former employer (required)" aria-required="true" />
+            <div class="flabel"><span>Former employer</span><span style="color:var(--text-3)">(required)</span></div>
           </div>
 
-          <!-- Phone -->
           <div class="field">
-            <input type="tel" id="vi-phone" autocomplete="tel" placeholder=" " aria-label="Phone number (required)" aria-required="true" />
-            <div class="flabel"><span>Phone number</span><span style="color:var(--text-3)">(required)</span></div>
+            <input type="email" id="rf-contact-email" autocomplete="email" aria-label="Contact email (required)" aria-required="true" />
+            <div class="flabel"><span>Contact email</span><span style="color:var(--text-3)">(required)</span></div>
           </div>
 
-          <!-- Address -->
-          <div class="field">
-            <input type="text" id="vi-address" autocomplete="street-address" aria-label="Home address (required)" aria-required="true" />
-            <div class="flabel"><span>Home address</span><span style="color:var(--text-3)">(required)</span></div>
-          </div>
+          <div id="rf-error" style="display:none;color:var(--red);font-size:14px;font-weight:500;">Please fill in all fields to continue.</div>
 
-          <div id="vi-error" style="display:none;color:var(--red);font-size:14px;font-weight:500;">Please fill in all fields to continue.</div>
-
-          <button class="btn btn-primary" onclick="handleVerifyIdentity()">
-            Verify &amp; restore access
+          <button class="btn btn-primary" onclick="handleRecoveryFind()">
+            Submit request
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
 
@@ -567,27 +834,54 @@
         <div class="info-box neutral">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style="flex-shrink:0;margin-top:1px"><circle cx="9" cy="9" r="7.5" stroke="#676d7a" stroke-width="1.4"/><path d="M9 5.5v4M9 11.5h.01" stroke="#676d7a" stroke-width="1.4" stroke-linecap="round"/></svg>
           <div class="info-box-body">
-            <p class="info-box-title neutral">Why do we need this?</p>
-            <p class="info-box-text">This information is used solely to confirm your identity. It's never shared or used for any other purpose.</p>
+            <p class="info-box-title neutral">What happens next?</p>
+            <p class="info-box-text">Our team verifies your details against your account record and reaches out with next steps at the contact email you provide.</p>
           </div>
         </div>
 
-      </div><!-- /screen-verify-identity -->
+      </div><!-- /screen-recovery-find -->
 
 
       <!-- ════════════════════════════════
-           SCREEN 2 — Add personal email
+           SCREEN — Recovery: find submitted
+      ════════════════════════════════ -->
+      <div id="screen-recovery-find-submitted" class="screen">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center;padding:12px 0;">
+          <div class="icon-bubble green" style="width:72px;height:72px;">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <circle cx="16" cy="16" r="13" stroke="#16a34a" stroke-width="1.5"/>
+              <path d="M9 16l5 5 9-10" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <h2 class="h2">Request submitted</h2>
+            <p class="sub">We'll review your details and reach out to <strong id="rf-submitted-email" style="color:var(--text)">your email</strong> within 1–2 business days.</p>
+          </div>
+          <div class="info-box neutral" style="text-align:left;width:100%;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style="flex-shrink:0;margin-top:1px"><circle cx="9" cy="9" r="7.5" stroke="#676d7a" stroke-width="1.4"/><path d="M9 5.5v4M9 11.5h.01" stroke="#676d7a" stroke-width="1.4" stroke-linecap="round"/></svg>
+            <div class="info-box-body">
+              <p class="info-box-title neutral">Keep an eye on your inbox</p>
+              <p class="info-box-text">You'll hear from help@getcandidly.com. Check your spam folder if you don't see it.</p>
+            </div>
+          </div>
+          <button class="tlink" onclick="showScreen('login')">Back to login</button>
+        </div>
+      </div><!-- /screen-recovery-find-submitted -->
+
+
+      <!-- ════════════════════════════════
+           SCREEN — Add personal email
       ════════════════════════════════ -->
       <div id="screen-add-email" class="screen">
 
-        <button class="back" onclick="showScreen('inbox-check')">
+        <button class="back" onclick="showScreen('recovery-undeliverable')">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="#265ddc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           Back
         </button>
 
         <div>
-          <h2 class="h2">Add a personal email instead</h2>
-          <p class="sub">If you have a personal email you'd like to use going forward, you can add and verify it now.</p>
+          <h2 class="h2">Add a personal email</h2>
+          <p class="sub">Enter a personal email address. We'll send you a verification code to confirm it's yours.</p>
         </div>
 
         <div style="display:flex;flex-direction:column;gap:16px;">
@@ -602,10 +896,10 @@
         </div>
 
         <div class="info-box neutral">
-          <img src="https://www.figma.com/api/mcp/asset/85049dea-98b5-4ae9-b2a8-0ee6cd80bce5" alt="" width="20" height="20" style="flex-shrink:0;margin-top:1px" />
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style="flex-shrink:0;margin-top:1px"><circle cx="9" cy="9" r="7.5" stroke="#676d7a" stroke-width="1.4"/><path d="M9 5.5v4M9 11.5h.01" stroke="#676d7a" stroke-width="1.4" stroke-linecap="round"/></svg>
           <div class="info-box-body">
-            <p class="info-box-title neutral">Why do we need this?</p>
-            <p class="info-box-text">Since your work email is inactive, a personal email lets you access your Candidly data securely after leaving your employer.</p>
+            <p class="info-box-title neutral">Why add a personal email?</p>
+            <p class="info-box-text">Work inboxes close after you leave. A personal email ensures you can always recover your Candidly account.</p>
           </div>
         </div>
 
@@ -613,7 +907,7 @@
 
 
       <!-- ════════════════════════════════
-           SCREEN 3 — OTP Entry
+           SCREEN — OTP Entry
       ════════════════════════════════ -->
       <div id="screen-otp" class="screen">
 
@@ -634,7 +928,6 @@
           </div>
         </div>
 
-        <!-- OTP input -->
         <div class="otp-group" role="group" aria-label="6-digit verification code">
           <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="Digit 1" />
           <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="Digit 2" />
@@ -646,7 +939,6 @@
 
         <button class="btn btn-primary" onclick="handleVerifyOTP()">Verify code</button>
 
-        <!-- Resend -->
         <div class="resend-row">
           <span class="resend-timer" id="resend-timer">Resend code in <strong id="resend-countdown">45</strong>s</span>
           <button class="resend-btn" id="resend-btn" disabled onclick="handleResendOTP()">Resend code</button>
@@ -660,7 +952,7 @@
 
 
       <!-- ════════════════════════════════
-           SCREEN 4 — Wrong Code
+           SCREEN — Wrong Code
       ════════════════════════════════ -->
       <div id="screen-wrong-code" class="screen">
 
@@ -682,7 +974,6 @@
           </div>
         </div>
 
-        <!-- Attempt bar -->
         <div class="attempt-bar" role="alert">
           <span class="attempt-text" id="attempt-text">Attempt 1 of 3</span>
           <div class="attempt-dots" id="attempt-dots" aria-hidden="true">
@@ -692,7 +983,6 @@
           </div>
         </div>
 
-        <!-- OTP re-entry -->
         <div class="otp-group" role="group" aria-label="6-digit verification code">
           <input class="otp-box error" type="text" inputmode="numeric" maxlength="1" aria-label="Digit 1" />
           <input class="otp-box error" type="text" inputmode="numeric" maxlength="1" aria-label="Digit 2" />
@@ -704,7 +994,6 @@
 
         <button class="btn btn-primary" onclick="handleWrongCodeRetry()">Try again</button>
 
-        <!-- Escape hatches — prominent -->
         <div style="display:flex;flex-direction:column;gap:10px;padding-top:4px;border-top:1px solid var(--border);">
           <p style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text-3);padding-top:4px;">Not working?</p>
           <button class="option-card secondary" style="padding:12px 16px" onclick="showScreen('add-email')">
@@ -726,7 +1015,7 @@
 
 
       <!-- ════════════════════════════════
-           SCREEN 5 — Email verified (transition)
+           SCREEN — Email verified
       ════════════════════════════════ -->
       <div id="screen-verified" class="screen">
         <div style="display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;padding:8px 0;">
@@ -749,7 +1038,7 @@
 
 
       <!-- ════════════════════════════════
-           SCREEN 6 — Set password (live strength meter)
+           SCREEN — Set password
       ════════════════════════════════ -->
       <div id="screen-set-password" class="screen">
 
@@ -765,22 +1054,19 @@
 
         <div style="display:flex;flex-direction:column;gap:20px;">
 
-          <!-- New password -->
           <div style="display:flex;flex-direction:column;gap:0;">
             <div class="field">
-              <input type="password" id="new-password" autocomplete="new-password" aria-label="New password (required)" aria-required="true" oninput="updateStrength(this.value)" />
+              <input type="password" id="new-password" autocomplete="new-password" aria-label="New password (required)" aria-required="true" oninput="updateStrengthFor(this.value,'sp')" />
               <div class="flabel"><span>New password</span><span style="color:var(--text-3)">(required)</span></div>
             </div>
-
-            <!-- Strength meter -->
-            <div class="strength-meter" id="strength-meter" aria-live="polite">
+            <div class="strength-meter" aria-live="polite">
               <div class="strength-track">
-                <div class="strength-seg" id="seg0"></div>
-                <div class="strength-seg" id="seg1"></div>
-                <div class="strength-seg" id="seg2"></div>
-                <div class="strength-seg" id="seg3"></div>
+                <div class="strength-seg" id="sp-seg0"></div>
+                <div class="strength-seg" id="sp-seg1"></div>
+                <div class="strength-seg" id="sp-seg2"></div>
+                <div class="strength-seg" id="sp-seg3"></div>
               </div>
-              <span class="strength-label" id="strength-label" style="color:var(--text-3)">Enter a password</span>
+              <span class="strength-label" id="sp-strength-label" style="color:var(--text-3)">Enter a password</span>
               <div class="pw-reqs" id="pw-reqs">
                 <div class="pw-req" id="req-len">
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M4 7l2.5 2.5L10 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -802,7 +1088,6 @@
             </div>
           </div>
 
-          <!-- Confirm password -->
           <div class="field">
             <input type="password" id="confirm-password" autocomplete="new-password" aria-label="Confirm password (required)" aria-required="true" />
             <div class="flabel"><span>Confirm password</span><span style="color:var(--text-3)">(required)</span></div>
@@ -815,7 +1100,7 @@
 
 
       <!-- ════════════════════════════════
-           SCREEN 7 — Success
+           SCREEN — Success (password reset)
       ════════════════════════════════ -->
       <div id="screen-success" class="screen">
         <div style="display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center;padding:12px 0;">
@@ -826,11 +1111,11 @@
             </svg>
           </div>
           <div>
-            <h2 class="h2">You're back in</h2>
-            <p class="sub">Your Candidly account is recovered.</p>
+            <h2 class="h2">Password updated</h2>
+            <p class="sub">Your new password is set. You can now log in to your Candidly account.</p>
           </div>
-          <button class="btn btn-primary" style="max-width:280px" onclick="alert('Redirecting to your Candidly account…')">
-            Go to my account →
+          <button class="btn btn-primary" style="max-width:280px" onclick="showScreen('login')">
+            Log in now →
           </button>
         </div>
       </div><!-- /screen-success -->
@@ -844,14 +1129,34 @@
     let state = {
       orgEmail:      '',
       personalEmail: '',
+      userStatus:    'active',   // 'active' | 'terminated'
+      recoveryEmail: '',
       otpAttempts:   0,
       resendTimer:   null,
+      linkSentTimer: null,
     };
-    const CORRECT_OTP = '123456'; // demo only
+    const CORRECT_OTP  = '123456'; // demo only
     const MAX_ATTEMPTS = 3;
 
     /* ═══════════════ SCREEN ROUTING ═══════════════ */
-    const ALL_SCREENS = ['login','terminated','verify-identity','add-email','otp','wrong-code','verified','set-password','success'];
+    const ALL_SCREENS = [
+      'login',
+      'dashboard',
+      'recovery',
+      'recovery-password',
+      'recovery-username',
+      'recovery-link-sent',
+      'recovery-new-password',
+      'recovery-undeliverable',
+      'recovery-find',
+      'recovery-find-submitted',
+      'add-email',
+      'otp',
+      'wrong-code',
+      'verified',
+      'set-password',
+      'success',
+    ];
 
     function showScreen(name) {
       ALL_SCREENS.forEach(s => {
@@ -861,8 +1166,7 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-
-    /* ═══════════════ TAB SWITCH (screen 1) ═══════════════ */
+    /* ═══════════════ TAB SWITCH ═══════════════ */
     function switchTab(tab) {
       ['magic','login'].forEach(key => {
         const tabEl   = document.getElementById('tab-' + key);
@@ -884,7 +1188,8 @@
       }
     }
 
-    /* ═══════════════ LOGIN HANDLER ═══════════════ */
+    /* ═══════════════ LOGIN — STATUS-AGNOSTIC ═══════════════ */
+    // Demo helper only — determines status for post-auth routing, never blocks login
     const PERSONAL_DOMAINS = new Set([
       'gmail.com','yahoo.com','hotmail.com','outlook.com',
       'icloud.com','me.com','live.com','aol.com','protonmail.com','hey.com'
@@ -896,57 +1201,136 @@
     }
 
     function handleLogin() {
-      const email = document.getElementById('email-username').value.trim();
-      if (!email) { document.getElementById('email-username').focus(); return; }
-      if (isOrgEmail(email)) {
-        state.orgEmail = email;
-        document.getElementById('inbox-email-display').textContent = email;
-        // Reset card selection
-        terminatedChoice = null;
-        ['card-yes','card-no'].forEach(id => document.getElementById(id)?.classList.remove('selected'));
-        showScreen('terminated');
-      }
+      const val = document.getElementById('email-username').value.trim();
+      if (!val) { document.getElementById('email-username').focus(); return; }
+
+      // Status is determined AFTER auth — never blocks login
+      // Demo: org email → terminated read-only; personal email → active
+      state.userStatus = isOrgEmail(val) ? 'terminated' : 'active';
+      state.orgEmail   = val;
+
+      showDashboard();
     }
 
-    function handleSendWorkRecovery() {
-      alert('Recovery link sent to ' + state.orgEmail + '. Check your work inbox.');
-    }
-
-    let terminatedChoice = null;
-
-    function selectRecoveryOption(choice) {
-      terminatedChoice = choice;
-      document.getElementById('card-yes').classList.toggle('selected', choice === 'yes');
-      document.getElementById('card-no').classList.toggle('selected', choice === 'no');
-    }
-
-    function handleTerminatedContinue() {
-      if (!terminatedChoice) return;
-      if (terminatedChoice === 'yes') {
-        handleSendWorkRecovery();
+    function showDashboard() {
+      const activeEl     = document.getElementById('dash-active');
+      const terminatedEl = document.getElementById('dash-terminated');
+      if (state.userStatus === 'terminated') {
+        activeEl.style.display     = 'none';
+        terminatedEl.style.display = 'flex';
       } else {
-        showScreen('verify-identity');
+        activeEl.style.display     = 'flex';
+        terminatedEl.style.display = 'none';
+      }
+      showScreen('dashboard');
+    }
+
+    /* ═══════════════ RECOVERY: FORGOT PASSWORD ═══════════════ */
+    function handleRecoveryPassword() {
+      const val   = document.getElementById('rp-identifier').value.trim();
+      const errEl = document.getElementById('rp-error');
+      if (!val) { document.getElementById('rp-identifier').focus(); return; }
+
+      // Demo: any non-empty input is treated as "found"
+      // To demo "not found", change `found` to false
+      const found = true;
+      if (found) {
+        state.recoveryEmail = val;
+        document.getElementById('link-sent-email').textContent = val;
+        errEl.style.display = 'none';
+        showScreen('recovery-link-sent');
+        startLinkSentTimer();
+      } else {
+        errEl.style.display = 'flex';
       }
     }
 
-    /* ═══════════════ VERIFY IDENTITY ═══════════════ */
-    function handleVerifyIdentity() {
-      const first   = document.getElementById('vi-first-name').value.trim();
-      const last    = document.getElementById('vi-last-name').value.trim();
-      const bday    = document.getElementById('vi-birthday').value.trim();
-      const phone   = document.getElementById('vi-phone').value.trim();
-      const address = document.getElementById('vi-address').value.trim();
-      const errEl   = document.getElementById('vi-error');
+    /* ═══════════════ RECOVERY: FORGOT USERNAME ═══════════════ */
+    function handleRecoveryUsername() {
+      const val   = document.getElementById('ru-email').value.trim();
+      const errEl = document.getElementById('ru-error');
+      if (!val || !val.includes('@')) { document.getElementById('ru-email').focus(); return; }
 
-      if (!first || !last || !bday || !phone || !address) {
+      // Demo: any non-empty input is treated as "found"
+      const found = true;
+      if (found) {
+        state.recoveryEmail = val;
+        document.getElementById('link-sent-email').textContent = val;
+        errEl.style.display = 'none';
+        showScreen('recovery-link-sent');
+        startLinkSentTimer();
+      } else {
+        errEl.style.display = 'flex';
+      }
+    }
+
+    /* ═══════════════ RECOVERY: LINK SENT ═══════════════ */
+    function startLinkSentTimer() {
+      const btn       = document.getElementById('ls-resend-btn');
+      const timerEl   = document.getElementById('ls-resend-timer');
+      const countdown = document.getElementById('ls-resend-countdown');
+      btn.disabled = true;
+      timerEl.style.display = 'inline';
+      btn.style.display = 'none';
+
+      let secs = 45;
+      countdown.textContent = secs;
+      clearInterval(state.linkSentTimer);
+      state.linkSentTimer = setInterval(() => {
+        secs--;
+        countdown.textContent = secs;
+        if (secs <= 0) {
+          clearInterval(state.linkSentTimer);
+          timerEl.style.display = 'none';
+          btn.style.display     = 'inline';
+          btn.disabled          = false;
+        }
+      }, 1000);
+    }
+
+    function handleLinkSentResend() {
+      startLinkSentTimer();
+      alert('New link sent to ' + (state.recoveryEmail || 'your email'));
+    }
+
+    function handleTryDifferentEmail() {
+      showScreen('recovery-password');
+    }
+
+    /* ═══════════════ RECOVERY: SET NEW PASSWORD ═══════════════ */
+    function handleRecoveryNewPassword() {
+      const pw    = document.getElementById('rnp-password').value;
+      const cpw   = document.getElementById('rnp-confirm').value;
+      const errEl = document.getElementById('rnp-error');
+      if (!pw || pw.length < 8) { document.getElementById('rnp-password').focus(); return; }
+      if (pw !== cpw) {
+        document.getElementById('rnp-confirm').classList.add('error');
         errEl.style.display = 'block';
+        document.getElementById('rnp-confirm').focus();
         return;
       }
       errEl.style.display = 'none';
       showScreen('success');
     }
 
-    /* ═══════════════ SEND OTP ═══════════════ */
+    /* ═══════════════ RECOVERY: FIND MY ACCOUNT ═══════════════ */
+    function handleRecoveryFind() {
+      const first   = document.getElementById('rf-first').value.trim();
+      const last    = document.getElementById('rf-last').value.trim();
+      const employer = document.getElementById('rf-employer').value.trim();
+      const email   = document.getElementById('rf-contact-email').value.trim();
+      const errEl   = document.getElementById('rf-error');
+
+      if (!first || !last || !employer || !email) {
+        errEl.style.display = 'block';
+        return;
+      }
+      errEl.style.display = 'none';
+      document.getElementById('rf-submitted-email').textContent = email;
+      showScreen('recovery-find-submitted');
+    }
+
+    /* ═══════════════ ADD PERSONAL EMAIL — OTP ═══════════════ */
     function handleSendOTP() {
       const email = document.getElementById('personal-email').value.trim();
       if (!email || !email.includes('@')) {
@@ -958,11 +1342,9 @@
       showScreen('otp');
       clearOTPBoxes('#screen-otp .otp-box');
       startResendTimer();
-      // Auto-focus first box
       document.querySelector('#screen-otp .otp-box').focus();
     }
 
-    /* ═══════════════ VERIFY OTP ═══════════════ */
     function handleVerifyOTP() {
       const boxes = document.querySelectorAll('#screen-otp .otp-box');
       const code  = [...boxes].map(b => b.value).join('');
@@ -978,7 +1360,6 @@
     }
 
     function showWrongCode() {
-      // populate attempt UI
       const remaining = MAX_ATTEMPTS - state.otpAttempts;
       document.getElementById('attempt-text').textContent =
         `Attempt ${state.otpAttempts} of ${MAX_ATTEMPTS}`;
@@ -1038,10 +1419,10 @@
       alert('New code sent to ' + state.personalEmail);
     }
 
-    /* ═══════════════ RESEND COUNTDOWN ═══════════════ */
+    /* ═══════════════ OTP RESEND COUNTDOWN ═══════════════ */
     function startResendTimer() {
-      const btn      = document.getElementById('resend-btn');
-      const timerEl  = document.getElementById('resend-timer');
+      const btn       = document.getElementById('resend-btn');
+      const timerEl   = document.getElementById('resend-timer');
       const countdown = document.getElementById('resend-countdown');
       btn.disabled = true;
       timerEl.style.display = 'inline';
@@ -1056,8 +1437,8 @@
         if (secs <= 0) {
           clearInterval(state.resendTimer);
           timerEl.style.display = 'none';
-          btn.style.display = 'inline';
-          btn.disabled = false;
+          btn.style.display     = 'inline';
+          btn.disabled          = false;
         }
       }, 1000);
     }
@@ -1098,37 +1479,42 @@
     }
 
     /* ═══════════════ PASSWORD STRENGTH ═══════════════ */
-    const STRENGTH_LABELS = ['Weak','Fair','Strong','Very strong'];
+    const STRENGTH_LABELS  = ['Weak','Fair','Strong','Very strong'];
     const STRENGTH_CLASSES = ['s0','s1','s2','s3'];
 
-    function updateStrength(val) {
+    // prefix: 'rnp' for recovery-new-password, 'sp' for set-password
+    function updateStrengthFor(val, prefix) {
       const checks = {
         len:     val.length >= 8,
         upper:   /[A-Z]/.test(val),
         num:     /[0-9]/.test(val),
         special: /[^A-Za-z0-9]/.test(val),
       };
-      const score = Object.values(checks).filter(Boolean).length; // 0-4
-      const level = val.length === 0 ? -1 : Math.min(score - 1, 3); // -1 to 3
+      const score = Object.values(checks).filter(Boolean).length;
+      const level = val.length === 0 ? -1 : Math.min(score - 1, 3);
 
-      // Update segments
       for (let i = 0; i < 4; i++) {
-        const seg = document.getElementById('seg' + i);
+        const seg = document.getElementById(prefix + '-seg' + i);
+        if (!seg) continue;
         seg.className = 'strength-seg';
         if (level >= 0 && i <= level) seg.classList.add('active', STRENGTH_CLASSES[level]);
       }
 
-      // Update label
-      const lbl = document.getElementById('strength-label');
-      lbl.className = 'strength-label';
-      if (level >= 0) { lbl.classList.add(STRENGTH_CLASSES[level]); lbl.textContent = STRENGTH_LABELS[level]; }
-      else            { lbl.textContent = 'Enter a password'; lbl.style.color = 'var(--text-3)'; }
+      const lbl = document.getElementById(prefix + '-strength-label');
+      if (lbl) {
+        lbl.className = 'strength-label';
+        if (level >= 0) { lbl.classList.add(STRENGTH_CLASSES[level]); lbl.textContent = STRENGTH_LABELS[level]; }
+        else            { lbl.textContent = 'Enter a password'; lbl.style.color = 'var(--text-3)'; }
+      }
 
-      // Update requirements
-      Object.entries(checks).forEach(([key, met]) => {
-        const el = document.getElementById('req-' + (key === 'len' ? 'len' : key === 'upper' ? 'upper' : key === 'num' ? 'num' : 'special'));
-        if (el) el.classList.toggle('met', met);
-      });
+      // Requirements checklist (only shown in set-password screen)
+      if (prefix === 'sp') {
+        const map = { len: 'req-len', upper: 'req-upper', num: 'req-num', special: 'req-special' };
+        Object.entries(checks).forEach(([key, met]) => {
+          const el = document.getElementById(map[key]);
+          if (el) el.classList.toggle('met', met);
+        });
+      }
     }
 
     /* ═══════════════ SET PASSWORD HANDLER ═══════════════ */
