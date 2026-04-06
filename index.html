@@ -579,13 +579,13 @@
 
         <div>
           <h2 class="h2">Reset your password</h2>
-          <p class="sub">Enter your username or org email. If we find a match, we'll send a reset link or ask you a quick follow-up.</p>
+          <p class="sub">Enter your primary email. If we find a match, we'll send a reset link or ask you a quick follow-up.</p>
         </div>
 
         <div style="display:flex;flex-direction:column;gap:16px;">
           <div class="field">
-            <input type="text" id="rp-identifier" autocomplete="username" aria-label="Username or org email (required)" aria-required="true" />
-            <div class="flabel"><span>Username or org email</span><span style="color:var(--text-3)">(required)</span></div>
+            <input type="email" id="rp-identifier" autocomplete="email" aria-label="Primary email (required)" aria-required="true" />
+            <div class="flabel"><span>Primary email</span><span style="color:var(--text-3)">(required)</span></div>
           </div>
 
           <div id="rp-error" style="display:none;" class="info-box red">
@@ -598,9 +598,8 @@
 
           <button class="btn btn-primary" onclick="handleRecoveryPassword()">Send reset link</button>
 
-          <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+          <div style="text-align:center;">
             <button class="tlink" onclick="showScreen('recovery-find')">I don't have access to my org email</button>
-            <button class="tlink" onclick="showScreen('recovery-find')">I don't know which email I used</button>
           </div>
         </div>
 
