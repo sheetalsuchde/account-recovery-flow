@@ -597,6 +597,11 @@
           </div>
 
           <button class="btn btn-primary" onclick="handleRecoveryPassword()">Send reset link</button>
+
+          <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+            <button class="tlink" onclick="showScreen('recovery-find')">I don't have access to my org email</button>
+            <button class="tlink" onclick="showScreen('recovery-find')">I don't know which email I used</button>
+          </div>
         </div>
 
         <!-- Demo strip -->
@@ -974,6 +979,21 @@
           <div class="field">
             <input type="text" id="rf-employer" autocomplete="organization" aria-label="Former employer (required)" aria-required="true" />
             <div class="flabel"><span>Former employer</span><span style="color:var(--text-3)">(required)</span></div>
+          </div>
+
+          <div class="field">
+            <input type="tel" id="rf-phone" autocomplete="tel" placeholder=" " aria-label="Phone number (required)" aria-required="true" />
+            <div class="flabel"><span>Phone number</span><span style="color:var(--text-3)">(required)</span></div>
+          </div>
+
+          <div class="field">
+            <input type="date" id="rf-dob" autocomplete="bday" aria-label="Date of birth (required)" aria-required="true" />
+            <div class="flabel"><span>Date of birth</span><span style="color:var(--text-3)">(required)</span></div>
+          </div>
+
+          <div class="field">
+            <input type="text" id="rf-address" autocomplete="street-address" placeholder=" " aria-label="Home address (required)" aria-required="true" />
+            <div class="flabel"><span>Home address</span><span style="color:var(--text-3)">(required)</span></div>
           </div>
 
           <div class="field">
@@ -1592,13 +1612,16 @@
 
     /* ═══════════════ RECOVERY: FIND MY ACCOUNT ═══════════════ */
     function handleRecoveryFind() {
-      const first   = document.getElementById('rf-first').value.trim();
-      const last    = document.getElementById('rf-last').value.trim();
+      const first    = document.getElementById('rf-first').value.trim();
+      const last     = document.getElementById('rf-last').value.trim();
       const employer = document.getElementById('rf-employer').value.trim();
-      const email   = document.getElementById('rf-contact-email').value.trim();
-      const errEl   = document.getElementById('rf-error');
+      const phone    = document.getElementById('rf-phone').value.trim();
+      const dob      = document.getElementById('rf-dob').value.trim();
+      const address  = document.getElementById('rf-address').value.trim();
+      const email    = document.getElementById('rf-contact-email').value.trim();
+      const errEl    = document.getElementById('rf-error');
 
-      if (!first || !last || !employer || !email) {
+      if (!first || !last || !employer || !phone || !dob || !address || !email) {
         errEl.style.display = 'block';
         return;
       }
