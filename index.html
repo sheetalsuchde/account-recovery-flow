@@ -398,10 +398,32 @@
 
         <div>
           <h1 class="h1">Log in to a debt-free future</h1>
-          <p class="sub">Log in with your username or email and password.</p>
+          <p class="sub">Get a one-time magic link sent to your email, or log in with your username or email and password.</p>
         </div>
 
-        <div style="display:flex;flex-direction:column;gap:16px;">
+        <div class="toggle-group" role="tablist" aria-label="Login method">
+          <button class="toggle-tab" id="tab-magic" role="tab" aria-selected="false" onclick="switchTab('magic')">
+            Magic link
+          </button>
+          <button class="toggle-tab active" id="tab-login" role="tab" aria-selected="true" onclick="switchTab('login')">
+            <img class="check-icon" src="https://www.figma.com/api/mcp/asset/550ba3f9-7e8e-4fb9-8691-dd3f7927ca87" alt="" />
+            Login
+          </button>
+        </div>
+
+        <button class="btn btn-google" type="button" aria-label="Log in with Google">
+          <img src="https://www.figma.com/api/mcp/asset/95248e61-34cf-44aa-9c47-6d2721dd487e" alt="Google" width="20" height="20" />
+          Log in with Google
+        </button>
+
+        <div class="divider">
+          <div class="divider-line"></div>
+          <span class="divider-label">or</span>
+          <div class="divider-line"></div>
+        </div>
+
+        <!-- Login panel -->
+        <div id="panel-login" role="tabpanel" style="display:flex;flex-direction:column;gap:16px;">
           <div class="field">
             <input type="text" id="email-username" autocomplete="username" aria-label="Email or username (required)" aria-required="true" />
             <div class="flabel"><span>Email or username</span><span style="color:var(--text-3)">(required)</span></div>
@@ -411,9 +433,21 @@
             <div class="flabel"><span>Password</span><span style="color:var(--text-3)">(required)</span></div>
           </div>
           <button class="btn btn-primary" onclick="handleLogin()">Log in</button>
+          <div style="text-align:center">
+            <button class="tlink" style="font-size:16px" onclick="showScreen('recovery-password')">Forgot your password?</button>
+          </div>
         </div>
 
-        <div style="text-align:center;">
+        <!-- Magic link panel -->
+        <div id="panel-magic" role="tabpanel" style="display:none;flex-direction:column;gap:16px;">
+          <div class="field">
+            <input type="email" id="magic-email" autocomplete="email" aria-label="Email address (required)" aria-required="true" />
+            <div class="flabel"><span>Email address</span><span style="color:var(--text-3)">(required)</span></div>
+          </div>
+          <button class="btn btn-primary">Send magic link</button>
+        </div>
+
+        <div style="text-align:center;padding-top:4px;">
           <button class="tlink" onclick="showScreen('recovery')">Trouble signing in?</button>
         </div>
 
