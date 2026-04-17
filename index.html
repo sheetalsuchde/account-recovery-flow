@@ -1460,6 +1460,11 @@
       state.userStatus = isOrgEmail(val) ? 'terminated' : 'active';
       state.orgEmail   = val;
 
+      if (state.userStatus === 'active') {
+        window.location.href = 'https://candidly-partner-dashboard.vercel.app/';
+        return;
+      }
+
       showDashboard();
     }
 
